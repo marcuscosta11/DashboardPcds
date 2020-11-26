@@ -5,7 +5,8 @@ var arrLayersPluvio = [];
 // MAPA
 arrLayersPluvio[0] = new ol.layer.Tile({
     title: "PCD's Pluviometricas",
-    source: new ol.source.XYZ({url: "http://virt142.cemaden.gov.br/osm_tiles/{z}/{x}/{y}.png"})
+    source: new ol.source.OSM()
+//    source: new ol.source.XYZ({url: "http://virt142.cemaden.gov.br/osm_tiles/{z}/{x}/{y}.png"})
 });
 
 // Estados
@@ -188,7 +189,8 @@ function getStatusPcdsPluvioMap(){
      $.ajax({
         async: true,
         global: false,        
-        url: "http://localhost:8081/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonStatusPcdsPluvio",
+//        url: "http://localhost:8081/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonStatusPcdsPluvio",/*cemaden local*/
+        url: "http://localhost:8080/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonStatusPcdsPluvio",/*meu desk*/
 //        url: "http://engenharia.cemaden.gov.br:8080/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonStatusPcdsPluvio",
         dataType: "json",
         cache: false,
@@ -208,7 +210,8 @@ function getPcdsInativasOperadorasPluvio(){
      $.ajax({
         async: true,
         global: false,        
-        url: "http://localhost:8081/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonPcdsInativasOperadora",
+//        url: "http://localhost:8081/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonPcdsInativasOperadora",/*local cemaden*/
+        url: "http://localhost:8080/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonPcdsInativasOperadora",/*meu desk*/
 //        url: "http://engenharia.cemaden.gov.br:8080/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonPcdsInativasOperadora",
         dataType: "json",
         cache: false,

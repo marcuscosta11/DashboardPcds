@@ -7,7 +7,8 @@ function getTotalPcdsQuadroGeralRede(){
      $.ajax({
         async: true,
         global: false,        
-        url: "http://localhost:8081/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonTotalPcdsQuadroGeralRede",
+//        url: "http://localhost:8081/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonTotalPcdsQuadroGeralRede",/*local cemaden*/
+        url: "http://localhost:8080/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonTotalPcdsQuadroGeralRede",/*meu desk*/
 //        url: "http://engenharia.cemaden.gov.br:8080/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonTotalPcdsQuadroGeralRede",
         dataType: "json",
         cache: false,
@@ -289,7 +290,8 @@ function updateValoresTotais() {
     $.ajax({
         async: true,
         global: false,
-        url: "http://localhost:8081/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonTotalPcdsQuadroGeralRede",
+//        url: "http://localhost:8081/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonTotalPcdsQuadroGeralRede",/*local cemaden*/
+        url: "http://localhost:8080/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonTotalPcdsQuadroGeralRede",/*meu desk*/
 //        url: "http://engenharia.cemaden.gov.br:8080/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonTotalPcdsQuadroGeralRede",
         dataType: "json",
         cache: false,
@@ -307,7 +309,8 @@ function updateValoresTotaisPluvio() {
     $.ajax({
         async: true,
         global: false,
-        url: "http://localhost:8081/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonTotalPcdsQuadroGeralRede",
+//        url: "http://localhost:8081/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonTotalPcdsQuadroGeralRede",/*local cemaden*/
+        url: "http://localhost:8080/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonTotalPcdsQuadroGeralRede",/*meu desk*/
 //        url: "http://engenharia.cemaden.gov.br:8080/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonTotalPcdsQuadroGeralRede",
         dataType: "json",
         cache: false,
@@ -325,7 +328,8 @@ function updateValoresTotaisAcqua(){
      $.ajax({
         async: true,
         global: false,        
-        url: "http://localhost:8081/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonTotalPcdsQuadroGeralRede",
+//        url: "http://localhost:8081/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonTotalPcdsQuadroGeralRede",/*local cemaden*/
+        url: "http://localhost:8080/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonTotalPcdsQuadroGeralRede",/*meu desk*/
 //        url: "http://engenharia.cemaden.gov.br:8080/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonTotalPcdsQuadroGeralRede",
         dataType: "json",
         cache: false,
@@ -344,7 +348,8 @@ function updateValoresTotaisHidro() {
     $.ajax({
         async: true,
         global: false,
-        url: "http://localhost:8081/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonTotalPcdsQuadroGeralRede",
+//        url: "http://localhost:8081/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonTotalPcdsQuadroGeralRede",/*local cemaden*/
+        url: "http://localhost:8080/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonTotalPcdsQuadroGeralRede",/*meu desk*/
 //        url: "http://engenharia.cemaden.gov.br:8080/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonTotalPcdsQuadroGeralRede",
         dataType: "json",
         cache: false,
@@ -362,7 +367,8 @@ function updateValoresTotaisAgro() {
     $.ajax({
         async: true,
         global: false,
-        url: "http://localhost:8081/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonTotalPcdsQuadroGeralRede",
+//        url: "http://localhost:8081/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonTotalPcdsQuadroGeralRede",/*local cemaden*/
+        url: "http://localhost:8080/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonTotalPcdsQuadroGeralRede",/*meu desk*/
 //        url: "http://engenharia.cemaden.gov.br:8080/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonTotalPcdsQuadroGeralRede",
         dataType: "json",
         cache: false,
@@ -380,7 +386,8 @@ function updateValoresTotaisGeo() {
     $.ajax({
         async: true,
         global: false,
-        url: "http://localhost:8081/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonTotalPcdsQuadroGeralRede",
+//        url: "http://localhost:8081/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonTotalPcdsQuadroGeralRede",/*local cemaden*/
+        url: "http://localhost:8080/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonTotalPcdsQuadroGeralRede",/*meu desk*/
 //        url: "http://engenharia.cemaden.gov.br:8080/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonTotalPcdsQuadroGeralRede",
         dataType: "json",
         cache: false,

@@ -48,6 +48,31 @@ body {
     height: 100%;
 }
 
+/*map*/
+#map { 
+	height: 750px; 
+}
+
+#map1 { 
+	height: 750px; 
+}
+
+#map2 { 
+	height: 750px; 
+}
+
+#map3 { 
+	height: 750px; 
+}
+
+#map4 { 
+	height: 750px; 
+}
+
+#map5 { 
+	height: 750px; 
+}
+/*map*/
 .row-metricas{
  margin-right:15%;
  margin-left:20%;
@@ -8032,11 +8057,6 @@ ul, menu, dir {
     margin-right:8px;
     height: 0px;
 }
-@media screen and (max-device-width:1024px){
-    #rhpaneGeral{
-        display:none
-    }
-}
 
 #rhpaneGeral #overlayGeral{
     width:63px;
@@ -8299,11 +8319,7 @@ ul, menu, dir {
     margin-right:8px;
     height: 0px;
 }
-@media screen and (max-device-width:1024px){
-    #rhpanePluvio{
-        display:none
-    }
-}
+
 
 #rhpanePluvio #overlayPluvio{
     width:63px;
@@ -8584,11 +8600,7 @@ ul, menu, dir {
     margin-right:8px;
     height: 0px;
 }
-@media screen and (max-device-width:1024px){
-    #rhpaneAcqua{
-        display:none
-    }
-}
+
 
 #rhpaneAcqua #overlayAcqua{
     width:63px;
@@ -8869,11 +8881,7 @@ ul, menu, dir {
     margin-right:8px;
     height: 0px;
 }
-@media screen and (max-device-width:1024px){
-    #rhpaneHidro{
-        display:none
-    }
-}
+
 
 #rhpaneHidro #overlayHidro{
     width:63px;
@@ -9161,11 +9169,7 @@ ul, menu, dir {
     margin-right:8px;
     height: 0px;
 }
-@media screen and (max-device-width:1024px){
-    #rhpaneAgro{
-        display:none
-    }
-}
+
 
 #rhpaneAgro #overlayAgro{
     width:63px;
@@ -9428,12 +9432,6 @@ ul, menu, dir {
     margin-right:8px;
     height: 0px;
 }
-@media screen and (max-device-width:1024px){
-    #rhpaneGeo{
-        display:none
-    }
-}
-
 #rhpaneGeo #overlayGeo{
     width:63px;
     /*margin-bottom:-78px;*/
@@ -9717,7 +9715,7 @@ display: block;
     height: 16px;
     width: 16px;
     margin-right: 5px;
-    margin-left: 0;
+    margin-left: 5px;
     border: 1px solid #000;
     border-radius: 50%;
     }
@@ -9738,7 +9736,7 @@ display: block;
         display: none;
         width: min-content;
         height: 195px; 
-        background-color: #323a3ad4;
+        background-color: #323a3a;
         border-radius: 5px;border: 1.2px solid;
     }
     
