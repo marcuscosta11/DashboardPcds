@@ -8,8 +8,8 @@ var arrLayersQuadroGeral = [];
 // MAPA
 arrLayersQuadroGeral[0] = new ol.layer.Tile({
     title: "Quadro Geral",
-    source: new ol.source.OSM()
-//    source: new ol.source.XYZ({url: "http://virt142.cemaden.gov.br/osm_tiles/{z}/{x}/{y}.png"})
+//    source: new ol.source.OSM()
+    source: new ol.source.XYZ({url: "http://virt142.cemaden.gov.br/osm_tiles/{z}/{x}/{y}.png"})
 });
 
 // Estados
@@ -187,8 +187,8 @@ function getStatusPcdsQuadroGeralMaps(){
      $.ajax({
         async: true,
         global: false,        
-//        url: "http://localhost:8081/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonStatusPcdsQuadroGeralMaps",/*local cemaden*/
-        url: "http://localhost:8080/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonStatusPcdsQuadroGeralMaps",/*meu desk*/
+        url: "http://localhost:8081/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonStatusPcdsQuadroGeralMaps",/*local cemaden*/
+//        url: "http://localhost:8080/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonStatusPcdsQuadroGeralMaps",/*meu desk*/
 //        url: "http://engenharia.cemaden.gov.br:8080/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonStatusPcdsQuadroGeralMaps",
         dataType: "json",
         cache: false,

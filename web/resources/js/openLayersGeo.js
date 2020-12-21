@@ -9,8 +9,8 @@ var arrLayersGeotecnica = [];
 // MAPA
 arrLayersGeotecnica[0] = new ol.layer.Tile({
     title: "PCD's Geo",
-    source: new ol.source.OSM()
-//    source: new ol.source.XYZ({url: "http://virt142.cemaden.gov.br/osm_tiles/{z}/{x}/{y}.png"})
+//    source: new ol.source.OSM()
+    source: new ol.source.XYZ({url: "http://virt142.cemaden.gov.br/osm_tiles/{z}/{x}/{y}.png"})
 });
 
 // Estados
@@ -60,8 +60,8 @@ function getStatusPcdsGeoMap(){
      $.ajax({
         async: true,
         global: false,        
-//        url: "http://localhost:8081/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonStatusPcdsGeo",/*local cemaden*/
-        url: "http://localhost:8080/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonStatusPcdsGeo",/*meu desk*/
+        url: "http://localhost:8081/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonStatusPcdsGeo",/*local cemaden*/
+//        url: "http://localhost:8080/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonStatusPcdsGeo",/*meu desk*/
 //        url: "http://engenharia.cemaden.gov.br:8080/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonStatusPcdsGeo",
         dataType: "json",
         cache: false,
@@ -82,8 +82,8 @@ function getPcdsInativasOperadorasGeo(){
      $.ajax({
         async: true,
         global: false,        
-//        url: "http://localhost:8081/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonPcdsInativasOperadora",/*local cemaden*/
-        url: "http://localhost:8080/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonPcdsInativasOperadora",/*meu desk*/
+        url: "http://localhost:8081/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonPcdsInativasOperadora",/*local cemaden*/
+//        url: "http://localhost:8080/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonPcdsInativasOperadora",/*meu desk*/
 //        url: "http://engenharia.cemaden.gov.br:8080/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonPcdsInativasOperadora",
         dataType: "json",
         cache: false,
@@ -101,7 +101,7 @@ function getPcdsInativasOperadorasGeo(){
 var map5 = new ol.Map({
     target: 'map5',
     controls: ol.control.defaults().extend([
-                    new ol.control.FullScreen()
+//                    new ol.control.FullScreen()
     ]),
     layers: arrLayersGeotecnica,
     view: new ol.View({
