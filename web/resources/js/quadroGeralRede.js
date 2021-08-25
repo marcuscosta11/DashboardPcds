@@ -7,9 +7,9 @@ function getTotalPcdsQuadroGeralRede(){
      $.ajax({
         async: true,
         global: false,        
-//        url: "http://localhost:8081/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonTotalPcdsQuadroGeralRede",/*local cemaden*/
+        url: "http://localhost:8081/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonTotalPcdsQuadroGeralRede",/*local cemaden*/
 //        url: "http://localhost:8080/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonTotalPcdsQuadroGeralRede",/*meu desk*/
-        url: "http://engenharia.cemaden.gov.br:8080/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonTotalPcdsQuadroGeralRede",
+//        url: "http://engenharia.cemaden.gov.br:8080/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonTotalPcdsQuadroGeralRede",
         dataType: "json",
         cache: false,
         crossDomain: false,
@@ -203,7 +203,7 @@ function getTotalPcdsQuadroGeralRede(){
     }); 
 }
 
-//function printTable(data){
+//function printTable(data){//Iprime tabela com valores de forma dinamica
 //    var dados = [], pcds = ["pluvio","acqua","hidro","agro","geo","totalPcds"]; 
 //    operadora = ["Sem Chip","Oi","Vivo","Claro","Tim","TotalPcds"];
 //    $('#dadosTableBody').empty();
@@ -229,70 +229,35 @@ function getTotalPcdsQuadroGeralRede(){
 //}
    
 //Retorna Json com os chips inativos por operadora
-//function getChipOperadora() {
-//    $.ajax({
-//        async: true,
-//        global: false,
-//        url: "http://localhost:8081/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonQtdChipOperadora",
-////        url: "http://engenharia.cemaden.gov.br:8080/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonQtdChipOperadora",
-//        dataType: "json",
-//        cache: false,
-//        crossDomain: true,
-//        success: function (data) {
+function getChipOperadoraInativas() {
+    $.ajax({
+        async: true,
+        global: false,
+        url: "http://localhost:8081/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonQtdPcdsInativasbyOperadora",
+////        url: "http://engenharia.cemaden.gov.br:8080/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonQtdPcdsInativasbyOperadora",
+        dataType: "json",
+        cache: false,
+        crossDomain: true,
+        success: function (data) {
+//            printTable(data); 
             
-//            printTable(data);
-   
-//            $('#vodafone-pluvio').html('<b> Vodafone - ' + data.pluvio[0][0] + '</b>');
-//            $('#oi-pluvio').html('<b>' + data.pluvio[1][0] + '</b>');
-//            $('#vivo-pluvio').html('<b>' + data.pluvio[2][0] + '</b>');
-//            $('#claro-pluvio').html('<b>' + data.pluvio[3][0] + '</b>');
-//            $('#tim-pluvio').html('<b>' + data.pluvio[4][0] + '</b>');
-//
-//            $('#vodafone-acqua').html('<b>' + data.acqua[0][0] + '</b>');
-//            $('#oi-acqua').html('<b>' + data.acqua[1][0] + '</b>');
-//            $('#vivo-acqua').html('<b>' + data.acqua[2][0] + '</b>');
-//            $('#claro-acqua').html('<b>' + data.acqua[3][0] + '</b>');
-//            $('#tim-acqua').html('<b>' + data.acqua[4][0] + '</b>');
-//
-//            $('#vodafone-hidro').html('<b>' + data.hidro[0][0] + '</b>');
-//            $('#oi-hidro').html('<b>' + data.hidro[1][0] + '</b>');
-//            $('#vivo-hidro').html('<b>' + data.hidro[2][0] + '</b>');
-//            $('#claro-hidro').html('<b>' + data.hidro[3][0] + '</b>');
-//            $('#tim-hidro').html('<b>' + data.hidro[4][0] + '</b>');
-//
-//            $('#vodafone-agro').html('<b>' + data.agro[0][0] + '</b>');
-//            $('#oi-agro').html('<b>' + data.agro[1][0] + '</b>');
-//            $('#vivo-agro').html('<b>' + data.agro[2][0] + '</b>');
-//            $('#claro-agro').html('<b>' + data.agro[3][0] + '</b>');
-//            $('#tim-agro').html('<b>' + data.agro[4][0] + '</b>');
-//            
-//            
-//            $('#vodafone-geo').html('<b>' + data.geo[0][0] + '</b>');
-//            $('#oi-geo').html('<b>' + data.geo[1][0] + '</b>');
-////            $('#vivo-geo').html('<b>' + data.geo[2][0] + '</b>').empty();
-////            $('#claro-geo').html('<b>' + data.geo[3][0] + '</b>');
-////            $('#tim-geo').html('<b>' + data.geo[4][0] + '</b>');
-//             
-//             $('#vodafone-pcds').html('<b>' + data.totalPcds[0][0] + '</b>');
-//             $('#oi-pcds').html('<b>' + data.totalPcds[1][0] + '</b>');
-//             $('#vivo-pcds').html('<b>' + data.totalPcds[2][0] + '</b>');
-//             $('#claro-pcds').html('<b>' + data.totalPcds[3][0] + '</b>');
-//             $('#tim-pcds').html('<b>' + data.totalPcds[4][0] + '</b>'); 
-//        }
-//
-//    });
-//}
-
-
-
+            claro = data.totalPcds[0][0];
+            oi = data.totalPcds[1][0];
+            tim = data.totalPcds[2][0];
+            vivo = data.totalPcds[3][0];
+            sem_chip = data.totalPcds[4][0];
+            graficoPieQuadroGeralOperadoras(claro, oi, tim, vivo, sem_chip);
+        }
+    });
+}
 
 function updateValoresTotais() {
     $.ajax({
         async: true,
         global: false,
-//        url: "http://localhost:8081/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonTotalPcdsQuadroGeralRede",/*local cemaden*/
+        url: "http://localhost:8081/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonTotalPcdsQuadroGeralRede",/*local cemaden*/
 //        url: "http://localhost:8080/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonTotalPcdsQuadroGeralRede",/*meu desk*/
-        url: "http://engenharia.cemaden.gov.br:8080/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonTotalPcdsQuadroGeralRede",
+//        url: "http://engenharia.cemaden.gov.br:8080/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonTotalPcdsQuadroGeralRede",
         dataType: "json",
         cache: false,
         crossDomain: false,
@@ -309,9 +274,9 @@ function updateValoresTotaisPluvio() {
     $.ajax({
         async: true,
         global: false,
-//        url: "http://localhost:8081/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonTotalPcdsQuadroGeralRede",/*local cemaden*/
+        url: "http://localhost:8081/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonTotalPcdsQuadroGeralRede",/*local cemaden*/
 //        url: "http://localhost:8080/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonTotalPcdsQuadroGeralRede",/*meu desk*/
-        url: "http://engenharia.cemaden.gov.br:8080/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonTotalPcdsQuadroGeralRede",
+//        url: "http://engenharia.cemaden.gov.br:8080/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonTotalPcdsQuadroGeralRede",
         dataType: "json",
         cache: false,
         crossDomain: false,
@@ -328,9 +293,9 @@ function updateValoresTotaisAcqua(){
      $.ajax({
         async: true,
         global: false,        
-//        url: "http://localhost:8081/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonTotalPcdsQuadroGeralRede",/*local cemaden*/
+        url: "http://localhost:8081/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonTotalPcdsQuadroGeralRede",/*local cemaden*/
 //        url: "http://localhost:8080/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonTotalPcdsQuadroGeralRede",/*meu desk*/
-        url: "http://engenharia.cemaden.gov.br:8080/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonTotalPcdsQuadroGeralRede",
+//        url: "http://engenharia.cemaden.gov.br:8080/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonTotalPcdsQuadroGeralRede",
         dataType: "json",
         cache: false,
         crossDomain: false,
@@ -348,9 +313,9 @@ function updateValoresTotaisHidro() {
     $.ajax({
         async: true,
         global: false,
-//        url: "http://localhost:8081/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonTotalPcdsQuadroGeralRede",/*local cemaden*/
+        url: "http://localhost:8081/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonTotalPcdsQuadroGeralRede",/*local cemaden*/
 //        url: "http://localhost:8080/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonTotalPcdsQuadroGeralRede",/*meu desk*/
-        url: "http://engenharia.cemaden.gov.br:8080/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonTotalPcdsQuadroGeralRede",
+//        url: "http://engenharia.cemaden.gov.br:8080/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonTotalPcdsQuadroGeralRede",
         dataType: "json",
         cache: false,
         crossDomain: false,
@@ -367,9 +332,9 @@ function updateValoresTotaisAgro() {
     $.ajax({
         async: true,
         global: false,
-//        url: "http://localhost:8081/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonTotalPcdsQuadroGeralRede",/*local cemaden*/
+        url: "http://localhost:8081/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonTotalPcdsQuadroGeralRede",/*local cemaden*/
 //        url: "http://localhost:8080/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonTotalPcdsQuadroGeralRede",/*meu desk*/
-        url: "http://engenharia.cemaden.gov.br:8080/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonTotalPcdsQuadroGeralRede",
+//        url: "http://engenharia.cemaden.gov.br:8080/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonTotalPcdsQuadroGeralRede",
         dataType: "json",
         cache: false,
         crossDomain: false,
@@ -386,9 +351,9 @@ function updateValoresTotaisGeo() {
     $.ajax({
         async: true,
         global: false,
-//        url: "http://localhost:8081/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonTotalPcdsQuadroGeralRede",/*local cemaden*/
+        url: "http://localhost:8081/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonTotalPcdsQuadroGeralRede",/*local cemaden*/
 //        url: "http://localhost:8080/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonTotalPcdsQuadroGeralRede",/*meu desk*/
-        url: "http://engenharia.cemaden.gov.br:8080/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonTotalPcdsQuadroGeralRede",
+//        url: "http://engenharia.cemaden.gov.br:8080/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonTotalPcdsQuadroGeralRede",
         dataType: "json",
         cache: false,
         crossDomain: false,
@@ -402,7 +367,7 @@ function updateValoresTotaisGeo() {
 }
 
 /*============================================================================*/
-/*grafico de pizza quadro geral*/
+/*grafico de pizza quadro geral - status geral da rede*/
 function graficoPieQuadroGeral(operacional, inativas, suspeitas, desabilitadas) {
     Highcharts.chart('container-status', {
         chart: {
@@ -448,6 +413,54 @@ function graficoPieQuadroGeral(operacional, inativas, suspeitas, desabilitadas) 
 }
 
 
+//grafico pizza status inatividades operadoras nas ultimas 24 horas
+function graficoPieQuadroGeralOperadoras(claro, oi, tim, vivo, semOperadora) {
+    Highcharts.chart('container-operadoras', {
+        chart: {
+            type: 'pie'
+        },
+        title: {
+            text: 'Inatividade Chips - Últimas 24h'
+        },
+        colors: ['#69248a', '#0829cf', '#f28900', '#ff0000','#424040'], /*ordem das cores - [vivo, tim, oi, claro, sem chip definido]*/
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                    style: {
+                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                    }
+                }
+            }
+        },
+        series: [{
+                name: 'Status',
+                data: [{
+                        name: 'Vivo',
+                        y: vivo
+                    }, {
+                        name: 'Tim',
+                        y: tim
+                    }, {
+                        name: 'Oi',
+                        y: oi
+                    }, {
+                        name: 'Claro',
+                        y: claro
+                    },{
+                        name: 'Sem Chip definido',
+                        y: semOperadora
+                    }]
+            }]
+    });
+}
+
 function lastUpdate(){
     var date = new Date();
     $('#outPut-lastUpdate').html(date.toLocaleString('pt-BR'));
@@ -468,7 +481,7 @@ function updateCarousel() {
     crsl.carousel({interval: false, pause: true, wrap: false}).on('slid.bs.carousel', function () {          
         if($('#pagina-0').hasClass("active")){
             getTotalPcdsQuadroGeralRede();  
-//            getChipOperadora();
+            getChipOperadoraInativas();
             lastUpdate();
         }        
         if($('#pagina-1').hasClass("active")){
@@ -529,7 +542,7 @@ function gotoSlide(number){
 
 $(document).ready(function(){
   getTotalPcdsQuadroGeralRede();
-//  getChipOperadora();
+  getChipOperadoraInativas();
   updateCarousel();
   lastUpdate();
     window.onload = function () {

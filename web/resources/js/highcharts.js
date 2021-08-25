@@ -12,9 +12,9 @@ function plotarGraficosdeColunas(estacao) {
     $.ajax({
         async: true,
         global: false,
-//        url: "http://localhost:8081/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonRedePcdsUF",/*local cemaden*/
+        url: "http://localhost:8081/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonRedePcdsUF",/*local cemaden*/
 //        url: "http://localhost:8080/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonRedePcdsUF",/*meu desk*/
-        url: "http://engenharia.cemaden.gov.br:8080/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonRedePcdsUF",
+//        url: "http://engenharia.cemaden.gov.br:8080/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonRedePcdsUF",
         dataType: "json",
         cache: false,
         crossDomain: true,
@@ -137,9 +137,9 @@ function plotarGraficosdeLinhas(estacao) {
     $.ajax({
         async: true,
         global: false,
-//        url: "http://localhost:8081/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonInatividadePcds",/*local cemaden*/
+        url: "http://localhost:8081/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonInatividadePcds",/*local cemaden*/
 //        url: "http://localhost:8080/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonInatividadePcds",/*meu desk*/
-        url: "http://engenharia.cemaden.gov.br:8080/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonInatividadePcds",
+//        url: "http://engenharia.cemaden.gov.br:8080/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonInatividadePcds",
         dataType: "json",
         cache: false,
         crossDomain: true,
@@ -250,26 +250,6 @@ function plotarGraficosdeLinhas(estacao) {
         }
     });
 }
-
-////Retorna Json com os chips inativos por operadora
-//function getChipOperadora(){
-//    $.ajax({
-//        async: true,
-//        global: false,
-//        url: "http://localhost:8081/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonQtdChipOperadora",
-////        url: "http://engenharia.cemaden.gov.br:8080/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonQtdChipOperadora",
-//        dataType: "json",
-//        cache: false,
-//        crossDomain: true,
-//        success: function (data) {             
-//            return data;                    
-//        }
-//    });
-//}
-
-
-
-
 
 /*===========================inicio dos graficos================================*/
 
