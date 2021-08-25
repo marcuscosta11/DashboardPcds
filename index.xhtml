@@ -1,0 +1,1471 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html" >
+    <head>
+        <title>Monitor da Rede Observacional</title>                       
+        
+        <!--Favicon-->
+        <link rel="icon" href="resources/img/favicon.png" type="image/png"></link>                      
+        
+        <!-- CSS -->
+        <link rel="stylesheet" type="text/css" id="theme" href="resources/css/theme-default.css"></link>                                   
+        
+        <!--Jquery-->
+        <script src="resources/js/plugins/jquery/jquery.min.js"></script>
+        <script src="resources/js/plugins/jquery/jquery-ui.min.js"></script>
+     
+        <!--highcharts-->
+        <script src="https://code.highcharts.com/highcharts.js"></script>
+        <script src="https://code.highcharts.com/modules/exporting.js"></script>  
+        
+        <!--Open Layers-->        
+        <script src="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/build/ol.js"></script>
+        <link rel="stylesheet" href="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/css/ol.css"></link>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
+        
+        <!--BootStrap-->       
+        <script type="text/javascript" src="resources/js/plugins/bootstrap/bootstrap.min.js"></script> 
+        <script type="text/javascript" src='resources/js/plugins/bootstrap/bootstrap-datepicker.js'></script>        
+
+        <!--JavaScript-->
+        <script type="text/javascript" src="resources/js/quadroGeralRede.js"></script>                               
+        <script type="text/javascript" src="resources/js/highcharts.js"></script> 
+        <script type="text/javascript" src="resources/js/export-csv2.js"></script>         
+        <script type="text/javascript" src="resources/js/dashboardUtil.js"></script>       
+        <!--<script type="text/javascript" src="resources/js/dark.js"></script>-->       
+    </head>
+    <body id="body">
+        <!-- START PAGE CONTAINER -->
+        <div id="page-container-principal" class="page-container">            
+            <!--START CAROUSEL-->
+            <div id="myCarousel-pagina-completa" class="carousel slide"  style="width: 100%; height: 100%">               
+                <ol class="carousel-indicators">
+                    <li id="slide-0" data-target="#myCarousel-pagina-completa" data-slide-to="0" class="active"></li>
+                    <li id="slide-1" data-target="#myCarousel-pagina-completa" data-slide-to="1"></li>
+                    <li id="slide-2" data-target="#myCarousel-pagina-completa" data-slide-to="2"></li>                    
+                    <li id="slide-3" data-target="#myCarousel-pagina-completa" data-slide-to="3"></li>                    
+                    <li id="slide-4" data-target="#myCarousel-pagina-completa" data-slide-to="4"></li>                    
+                    <li id="slide-5" data-target="#myCarousel-pagina-completa" data-slide-to="5"></li>                                        
+                    <li id="slide-6" data-target="#myCarousel-pagina-completa" data-slide-to="6"></li>                                        
+                </ol>
+                <hr class="transition-timer-carousel-progress-bar"/>
+                <div id="c-inner" class="carousel-inner">
+                    <!--START PAGINA 0-->
+                    <div id="pagina-0" class="item active" data-slide-number="0" style="width: 100%; height: 100%">
+                        <ul class="x-navigation x-navigation-panel" style="height: 50px;background: linear-gradient(#aeb4b3 0%, #ffffff00 100%);"></ul>                                                                           
+                            <div class="row">                                
+                                <div class="col-md-12" style="bottom: 65px; height: 0px;">
+                                    <div class="title-position">
+                                        <h1 style="margin-top: 0px; margin-bottom: 0px;font-weight: 500; position: relative; top: 18px">Quadro Geral da Rede Observacional</h1>
+                                    </div>
+                                </div>
+                            </div>
+
+                        <div id="container-pagina-0">                            
+                            <div class="row">                            
+                                <div class="col-sm-2">
+                                     <a><img id="logo-cemaden-geo" class="logo-cemaden" src="resources/img/CemadenLog.png"/></a>
+                                </div>
+
+                                <!--TOTAL PCDS REGISTRADAS-->
+
+                                <div class="col-sm-1"> 
+                                    <div class="titulo-info-grafico">Total</div>
+                                    <label id="outPut-totalPcdsRegistradas" class="numero-info-grafico"/>
+                                </div>
+                                
+                                <div class="col-sm-1">
+                                    <div class="titulo-info-grafico">Ativa</div>
+                                    <label id="outPut-totalPcdsOperacional" class="numero-info-grafico"/>
+                                </div>
+                                
+                                <div class="col-sm-1">
+                                    <div class="titulo-info-grafico">Suspeita</div>
+                                    <label id="outPut-totalPcdsSuspeitas" class="numero-info-grafico"/>
+                                </div>
+
+                                <div class="col-sm-1">
+                                    <div class="titulo-info-grafico">Inativa</div>
+                                    <label id="outPut-totalPcdsInativas" class="numero-info-grafico"/>
+                                </div>
+                                
+                                <div class="col-sm-1">
+                                    <div class="titulo-info-grafico">Desabilitada</div>
+                                    <label id="outPut-totalPcdsDesabilitada" class="numero-info-grafico"/>
+                                    
+                                </div>
+                                                                
+                                <div class="col-sm-1">
+                                    <span class="fa fa-database"  data-toggle="tooltip" data-placement="bottom" title="Visualizar Quadro Geral da Rede" onclick="gotoSlide(1)" style="top: 15px;left: 49%;position: relative;z-index: 100000000;font-size: 62px; cursor: pointer;"></span>
+                                </div>
+                                                                
+                                <div class="col-sm-2">
+                                    <div class="relogio relogio-data">                               
+                                        <div class="relogio-title">Atualizado em: </div>
+                                        <div class="relogio-hora num-count">
+                                            <p id="outPut-lastUpdate"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-sm-2">
+                                    <!--ALERTA REDE GERAL-->
+                                    <div ><a><img id="red-alerta-geral" class="red-alertGeral" src="resources/img/red_alert.png"/></a></div>                                
+                                    <div><a><img id="yellow-alerta-geral" class="yellow-alertGeral" src="resources/img/yellow_alert.png"/></a></div>                                   
+                                </div>
+                            </div>                                                                                 
+
+                            <div id="row-pluvio-acqua" class="row">                            
+                                <!--PLUVIO-->
+                                <div class="col-md-6" style="padding-left: 5px;bottom: 20px">
+                                    <div id="alerta-pluvio" title="Visualizar rede Pluviométrica" onclick="gotoSlide(2)" class="widget" style="width: 100%;min-height: 225px; border-radius: 6px;background: rgb(0, 178, 221); cursor: pointer;"> 
+                                        <div class="nome-rede fonts">PLUVIOMÉTRICA</div>                                            
+                                        <div class="valor-total-pcd fonts"><label id="outPut-totalPcdsPluvio"/></div>                                            
+                                        <div class="subtitulo-ativas fonts">Ativas</div>                                           
+                                        <div class="subtitulo-inativas fonts">Inativas</div>                                             
+                                        <div class="subtitulo-suspeitas fonts" >Suspeita</div>                                              
+                                        <div class="subtitulo-desabilitadas fonts">Desabilitada</div>                                             
+                                        <div class="valor-ativas fonts"><label id="outPut-totalPcdsOperacionalPluvio"/></div>
+                                        <div class="valor-inativas fonts"><label id="outPut-totalPcdsInativasPluvio"/></div>
+                                        <div class="valor-suspeitas fonts"><label id="outPut-totalPcdsSuspeitasPluvio"/></div>
+                                        <div class="valor-desabilitadas fonts"><label id="outPut-totalPcdsDesabilitadaPluvio"/></div>                                              
+                                        <div style="visibility: hidden"><label id="alertaRedePluvio"/></div>                                                                                        
+                                        <div class="porcentagem-inativas fonts"><label id="porcentagem-inativas-pluvio"/></div>
+                                        <div class="porcentagem-ativas fonts"><label id="porcentagem-ativasPluvio"/></div>
+                                        <div class="porcentagem-suspeitas fonts"><label id="porcentagem-suspeitasPluvio"/></div>
+                                        <div class="porcentagem-desabilitadas fonts"><label id="porcentagem-desabilitadasPluvio"/></div>
+                                        
+                                        <div><a><img id="red-alerta-pluvio" class="red-alertPluvio" src="resources/img/red_alert.png"/></a></div>                                
+                                        <div><a><img id="yellow-alerta-pluvio" class="yellow-alertPluvio" src="resources/img/yellow_alert.png"/></a></div>                                                                                                                                 
+                                        <div><a><img id="icone-pluvio" onclick="gotoSlide(2)" class="icon-estacao" src="resources/img/Pluvio.png"/></a></div>                                            
+                                    </div>                                                                                                              
+                                </div>                                                                                                                               
+                                <!--PLUVIO-->  
+
+                                <!--ACQUA-->                                                                                                                                             
+                                <div class="col-md-6" style="padding-left: 5px;bottom: 20px">                                   
+                                    <div id="alerta-acqua" title="Visualizar rede Acqua" onclick="gotoSlide(3)" class="widget" style="width: 100%;min-height: 225px; border-radius: 6px;background:rgb(250, 206, 81);cursor: pointer;">
+                                        <div class="nome-rede fonts">ACQUA</div>
+                                        <div class="valor-total-pcd fonts"><h:outputText id="outPut-totalPcdsAcqua" value=""/></div>
+                                        <div class="subtitulo-ativas fonts">Ativas</div>
+                                        <div class="subtitulo-inativas fonts">Inativas</div> 
+                                        <div class="subtitulo-suspeitas fonts">Suspeita</div>
+                                        <div class="subtitulo-desabilitadas fonts">Desabilitada</div>                                            
+                                        <div class="valor-ativas fonts"><label id="outPut-totalPcdsOperacionalAcqua"/></div>
+                                        <div class="valor-inativas fonts"><label id="outPut-totalPcdsInativasAcqua"/></div>
+                                        <div class="valor-suspeitas fonts"><label id="outPut-totalPcdsSuspeitasAcqua"/></div>
+                                        <div class="valor-desabilitadas fonts"><label id="outPut-totalPcdsDesabilitadaAcqua"/></div>                                                                                                                                                                       
+                                        <div style="visibility: hidden"><label id="alertaRedeAcqua"/></div>                                             
+                                        <div class="porcentagem-inativas fonts"><label id="porcentagem-inativas-acqua"/></div>
+                                        <div class="porcentagem-ativas fonts"><label id="porcentagem-ativasAcqua"/></div>
+                                        <div class="porcentagem-suspeitas fonts"><label id="porcentagem-suspeitasAcqua"/></div>
+                                        <div class="porcentagem-desabilitadas fonts"><label id="porcentagem-desabilitadasAcqua"/></div>                                                                                                           
+                                        <div><a><img id="red-alerta-acqua" class="red-alertAcqua" src="resources/img/red_alert.png"/></a></div>                                
+                                        <div><a><img id="yellow-alerta-acqua" class="yellow-alertAcqua" src="resources/img/yellow_alert.png"/></a></div>
+                                        <div><a><img id="icone-acqua" onclick="gotoSlide(3)" class="icon-estacao" src="resources/img/Acqua.png"/></a></div>                                                                                                                                                                                                                                                                                                           
+                                    </div>
+                                </div>                                                                                                                               
+                                <!--ACQUA-->
+                            </div>
+
+                            <div id="row-hidro-agro" class="row">
+                                <!--HIDRO-->
+                                <div class="col-md-6" style="padding-left: 5px;bottom: 17px">
+                                    <div id="alerta-hidro" title="Visualizar rede Hidrológica" onclick="gotoSlide(5)" class="widget" style="width: 100%;min-height: 225px; border-radius: 6px;background:rgb(255, 94, 104); cursor: pointer;">
+                                        <div class="nome-rede fonts">HIDROLÓGICA</div>
+                                        <div class="valor-total-pcd fonts"><h:outputText id="outPut-totalPcdsHidro" value=""/></div>
+                                        <div class="subtitulo-ativas fonts">Ativas</div>
+                                        <div class="subtitulo-inativas fonts">Inativas</div> 
+                                        <div class="subtitulo-suspeitas fonts">Suspeita</div>
+                                        <div class="subtitulo-desabilitadas fonts">Desabilitada</div>                                            
+                                        <div class="valor-ativas fonts"><label id="outPut-totalPcdsOperacionalHidro"/></div> 
+                                        <div class="valor-inativas fonts"><label id="outPut-totalPcdsInativasHidro"/></div>
+                                        <div class="valor-suspeitas fonts"><label id="outPut-totalPcdsSuspeitasHidro" /></div>                                            
+                                        <div class="valor-desabilitadas fonts"><label id="outPut-totalPcdsDesabilitadaHidro"/></div>                                                                                                                                                                                                                           
+                                        <div style="visibility: hidden"><label id="alertaRedeHidro"/></div>                                             
+                                        <div class="porcentagem-inativas fonts"><label id="porcentagem-inativas-hidro"/></div>
+                                        <div class="porcentagem-ativas fonts"><label id="porcentagem-ativasHidro"/></div>
+                                        <div class="porcentagem-suspeitas fonts"><label id="porcentagem-suspeitasHidro"/></div>
+                                        <div class="porcentagem-desabilitadas fonts"><label id="porcentagem-desabilitadasHidro"/></div>
+                                        <div><a><img id="red-alerta-hidro" class="red-alertHidro" src="resources/img/red_alert.png"/></a></div>                                                                            
+                                        <div><a><img id="yellow-alerta-hidro" class="yellow-alertHidro" src="resources/img/yellow_alert.png"/></a></div>                                            
+                                        <div><a><img id="icone-hidro" onclick="gotoSlide(5)" class="icon-estacao" src="resources/img/Hidro.png"/></a></div> 
+                                    </div>                                     
+                                </div>                                
+                                <!--HIDRO-->
+
+                                <!--AGRO-->
+                                <div class="col-md-6" style="padding-left: 5px;bottom: 17px">
+                                    <div id="alerta-agro" title="Visualizar rede Agrometeorológica" onclick="gotoSlide(4)" class="widget" style="width: 100%;min-height: 225px; border-radius: 6px;background:rgb(0, 178, 152);cursor: pointer;">
+                                        <div class="nome-rede fonts">AGROMETEOROLÓGICA</div>
+                                        <div class="valor-total-pcd fonts"><h:outputText id="outPut-totalPcdsAgro" value=""/></div>
+                                        <div class="subtitulo-ativas fonts">Ativas</div>
+                                        <div class="subtitulo-inativas fonts">Inativas</div> 
+                                        <div class="subtitulo-suspeitas fonts">Suspeita</div>
+                                        <div class="subtitulo-desabilitadas fonts">Desabilitada</div>                                            
+                                        <div class="valor-ativas fonts"><label id="outPut-totalPcdsOperacionalAgro"/></div>                                        
+                                        <div class="valor-inativas fonts"><label id="outPut-totalPcdsInativasAgro"/></div>
+                                        <div class="valor-suspeitas fonts"><label id="outPut-totalPcdsSuspeitasAgro"/></div>                                            
+                                        <div class="valor-desabilitadas fonts"><label id="outPut-totalPcdsDesabilitadaAgro"/></div>                                                                                                                                                                                                                      
+                                        <div style="visibility: hidden"><label id="alertaRedeAgro"/></div>                                             
+                                        <div class="porcentagem-inativas"><label id="porcentagem-inativas-agro"/></div>
+                                        <div class="porcentagem-ativas"><label id="porcentagem-ativasAgro"/></div>
+                                        <div class="porcentagem-suspeitas"><label id="porcentagem-suspeitasAgro"/></div>
+                                        <div class="porcentagem-desabilitadas"><label id="porcentagem-desabilitadasAgro"/></div>                                           
+                                        <div><a><img id="red-alerta-agro" class="red-alertAgro" src="resources/img/red_alert.png"/></a></div>                                
+                                        <div><a><img id="yellow-alerta-agro" class="yellow-alertAgro" src="resources/img/yellow_alert.png"/></a></div>
+                                        <div><a><img id="icone-agro" onclick="gotoSlide(4)" class="icon-estacao" src="resources/img/Agro.png"/></a></div> 
+                                    </div>
+                                </div>                                 
+                                <!--AGRO-->
+                            </div> 
+
+                            <div id="row-geo-status" class="row">
+                                <!--GEOTÉCNICA-->
+                                <div class="col-md-6" style="padding-left: 5px;bottom: 14px">
+                                    <div id="alerta-geo" title="Visualizar rede Geotécnica" onclick="gotoSlide(6)" class="widget" style="width: 100%;min-height: 225px; border-radius: 6px;background:rgb(165, 120, 71);cursor: pointer;">
+                                        <div class="nome-rede fonts">GEOTÉCNICA</div>
+                                        <div class="valor-total-pcd fonts" ><h:outputText id="outPut-totalPcdsGeo" value=""/></div>
+                                        <div class="subtitulo-ativas fonts">Ativas</div>
+                                        <div class="subtitulo-inativas fonts">Inativas</div> 
+                                        <div class="subtitulo-suspeitas fonts">Suspeita</div>
+                                        <div class="subtitulo-desabilitadas fonts">Desabilitada</div>                                        
+                                        <div class="valor-ativas fonts"><label id="outPut-totalPcdsOperacionalGeo"/></div>                                        
+                                        <div class="valor-inativas fonts"><label id="outPut-totalPcdsInativasGeo"/></div>
+                                        <div class="valor-suspeitas fonts"><label id="outPut-totalPcdsSuspeitasGeo"/></div>
+                                        <div class="valor-desabilitadas fonts"><label id="outPut-totalPcdsDesabilitadaGeo"/></div>                                                                                                                                                                                
+                                        <div style="visibility: hidden"><label id="alertaRedeGeo"/></div>                                         
+                                        <div class="porcentagem-inativas"><label id="porcentagem-inativas-geo"/></div>
+                                        <div class="porcentagem-ativas"><label id="porcentagem-ativasGeo"/></div>
+                                        <div class="porcentagem-suspeitas"><label id="porcentagem-suspeitasGeo"/></div>
+                                        <div class="porcentagem-desabilitadas"><label id="porcentagem-desabilitadasGeo"/></div>                                                                                                                                                                                                      
+                                        <div><a><img id="red-alerta-geo" class="red-alertGeo" src="resources/img/red_alert.png"/></a></div>                                
+                                        <div><a><img id="yellow-alerta-geo" class="yellow-alertGeo" src="resources/img/yellow_alert.png"/></a></div>                                            
+                                        <div><a><img id="icone-geo" onclick="gotoSlide(6)" class="icon-estacao" src="resources/img/Geo.png"/></a></div> 
+                                    </div>
+                                </div>
+                                <!--GEOTÉCNICA-->
+
+                                <!-- START STATUS REDE-->
+                                <div id="status-rede-geral" class="col-md-3" style="padding-left: 8px;top:-12px">  
+                                    <div id="container-status" style="min-width: 300px; height: 222px; margin: 0 auto; border: 2px solid currentColor;border-radius: 4px;" class="panel-body"></div> 
+                                </div> 
+                                
+                                <div id="status-rede-operadoras" class="col-md-3" style="padding-left: 8px;top:-12px">  
+                                    <div id="container-operadoras" style="min-width: 300px; height: 222px; margin: 0 auto; border: 2px solid currentColor;border-radius: 4px;" class="panel-body"></div> 
+                                </div>
+                                
+<!--                                <div id="operadoras" class="col-md-3" style="padding-left: 8px; bottom:29px;">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h3 class="panel-title-def">Chips Inativos por operadora</h3>
+                                        </div>
+                                        <div class="panel-body" style="padding: 15px;border: 2px solid;border-radius: 5px;" >
+                                            <table class="table table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Pcds</th>
+                                                        <th>Claro</th>
+                                                        <th>Oi</th>
+                                                        <th>Tim</th>
+                                                        <th>Vivo</th>
+                                                        <th>S/C</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="dadosTableBody">
+                                                </tbody>
+                                            </table>                                
+                                        </div>
+                                    </div>                                    
+                                </div>                                -->
+                            </div> 
+                        </div>
+                    </div>                    
+
+                    <!-- START CAROUSEL SEGUNDA PAGINA GRAFICOS QUADRO GERAL-->
+                    <div id="pagina-1" class="item" style="width: 100%; height: 100%">
+                        <ul class="x-navigation x-navigation-panel" style="height: 50px;background: linear-gradient(#aeb4b3 0%, #ffffff00 100%);"></ul>
+                        <div class="row">                            
+                            <div class="col-md-12" style="bottom: 65px; height: 0px;">
+                                <div class="title-position">
+                                    <h1 style="margin-top: 0px; margin-bottom: 0px;font-weight: 500; position: relative; top: 18px"> Rede Observacional do Cemaden</h1>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">                            
+                            <div class="col-sm-2">
+                                <a><img id="logo-cemaden-geo" class="logo-cemaden" onclick="gotoSlide(0)" style="cursor: pointer" src="resources/img/CemadenLog.png"/></a>
+                            </div>
+
+                            <!--ATIVAS GERAL--> 
+                            <div class="col-sm-1">
+                                <div class="titulo-info-grafico">Ativa</div>
+                                <label id="outPut-OperacionalGeral" class="numero-info-grafico"/>
+                            </div>
+
+                            <!--SUSPEITAS GERAL-->
+                            <div class="col-sm-1">
+                                <div class="titulo-info-grafico">Suspeita</div>
+                                <label id="outPut-SuspeitasGeral" class="numero-info-grafico"/>
+                            </div>
+
+                            <!--INATIVAS GERAL-->
+                            <div class="col-sm-1">
+                                <div class="titulo-info-grafico">Inativa</div>
+                                <label id="outPut-InativasGeral" class="numero-info-grafico"/>
+                            </div>
+
+                            <!--DESABILITADAS GERAL-->
+                            <div class="col-sm-2">
+                                <div class="titulo-info-grafico">Desabilitadas</div>
+                                <label id="outPut-DesabilitadasGeral" class="numero-info-grafico"/>
+                            </div>
+
+                            <div class="col-sm-2">
+                                <span class="fa fa-database" title="Voltar para Tela Principal" onclick="gotoSlide(0)" style="top: 15px;left: 12%;position: relative;z-index: 100000000;font-size: 62px; cursor: pointer;"></span>
+                            </div>                                                                
+                        </div>  
+
+                        <!--QUADRO GERAL REDE GRÁFICO DE COLUNAS-->
+                        <div class="col-md-8" style="bottom: 40px">
+                            <div id="table-container" style="height: 400px; margin: 36px auto"></div>
+                            <div id="table-container-disponibilidade-rede" style="height: 370px; margin: 0px auto"></div>                                        
+                        </div> 
+                        <!--QUADRO GERAL REDE GRÁFICO DE COLUNAS-->
+
+                        <!--MAPA GERAL-->
+                        <div class="col-md-4" style="bottom: 0px">                            
+                            <div class="col-sm">                                                                    
+                                <div id="map" style="box-shadow: 1px 1px 7px #00000052"></div>                                                                                               	
+                            </div>  
+                                                   
+                            <!--MENU DE CAMADAS GERAL CEMANDEN-->
+                            <div id="detail-rhpane-wrapper-geral">
+                                <div id="rhpaneGeral">
+                                    <ul id="overlayGeral" data-ref="overlayGeral" class="menu iconsize-19">
+                                        <li data-parent="cemadenGeral" class="selected">
+                                            <div class="iconfont noselect notap" style=" background: #b5bab9;box-shadow: 0px 0px 1px rgba(0,0,0,0.63);color: white;">CE</div>
+                                            <div class="menu-text noselect notap">Cemaden</div>
+                                        </li>                                    					
+                                        <li data-parent="cemadenGeral" data-layer="ativa_geral" class="sub-menu menu-unfold">
+                                            <div class="iconfont noselect notap">A</div>
+                                            <div class="menu-text noselect notap">Ativas</div>
+                                        </li>
+                                        <li data-parent="cemadenGeral" data-layer="suspeita_geral" class="sub-menu menu-unfold">
+                                            <div class="iconfont noselect notap">S</div>
+                                            <div class="menu-text noselect notap">Suspeita</div>
+                                        </li>
+
+                                        <li data-parent="cemadenGeral" data-layer="inatividade_geral" class="sub-menu menu-unfold mark_selected_inatividade">
+                                            <div class="iconfont noselect notap">I</div>
+                                            <div class="menu-text noselect notap">Inativas Geral</div>
+                                        </li>
+
+                                        <li id="inatividade-tempo" data-parent="cemadenGeral" data-layer="inatividade_tempo" class="sub-menu menu-unfold">
+                                            <div class="iconfont noselect notap">IT</div>
+                                            <div class="menu-text noselect notap">Inatividade por Tempo</div>
+                                        </li>
+
+                                        <li data-parent="cemadenGeral" data-layer="desabilitada_geral" class="sub-menu menu-unfold">
+                                            <div class="iconfont noselect notap">D</div>
+                                            <div class="menu-text noselect notap">Desabilitada</div>
+                                        </li>
+
+                                         <!--Operadoras-->
+                                        <li data-parent="chipOperadoraGeral" class="">
+                                            <div class="iconfont noselect notap">OP</div>
+                                            <div class="menu-text noselect notap">Operadoras</div>
+                                        </li>                                                                       
+
+                                        <li data-parent="chipOperadoraGeral" data-layer="chip_inativo_vodafone_geral" class="sub-menu">
+                                            <div class="iconfont noselect notap">V</div>
+                                            <div class="menu-text noselect notap">Vodafone</div>
+                                        </li>
+                                        <li data-parent="chipOperadoraGeral" data-layer="chip_inativo_oi_geral" class="sub-menu">
+                                            <div class="iconfont noselect notap">Oi</div>
+                                            <div class="menu-text noselect notap">Oi</div>
+                                        </li>    
+                                        <li data-parent="chipOperadoraGeral" data-layer="chip_inativo_vivo_geral" class="sub-menu">
+                                            <div class="iconfont noselect notap">Vi</div>
+                                            <div class="menu-text noselect notap">Vivo</div>
+                                        </li> 
+                                        <li data-parent="chipOperadoraGeral" data-layer="chip_inativo_claro_geral" class="sub-menu">
+                                            <div class="iconfont noselect notap">CL</div>
+                                            <div class="menu-text noselect notap">Claro</div>
+                                        </li>
+                                         
+                                        <li data-parent="chipOperadoraGeral" data-layer="chip_inativo_tim_geral" class="sub-menu">
+                                            <div class="iconfont noselect notap">T</div>
+                                            <div class="menu-text noselect notap">Tim</div>
+                                        </li>                                        
+                                        <!--Operadoras--> 
+                                        
+                                        <li data-parent="alertasGeral" class="">
+                                            <div class="iconfont noselect notap">AR</div>
+                                            <div class="menu-text noselect notap">Áreas de Risco</div>
+                                        </li>
+
+                                        <li data-parent="alertasGeral" data-layer="risco_hidrologico_geral" class="sub-menu">
+                                            <div class="iconfont noselect notap">H</div>
+                                            <div class="menu-text noselect notap">Hidro</div>
+                                        </li>  
+                                        <li data-parent="alertasGeral" data-layer="risco_geologico_geral" class="sub-menu">
+                                            <div class="iconfont noselect notap">G</div>
+                                            <div class="menu-text noselect notap">Geológico</div>
+                                        </li>                                 
+                                        <li data-parent="alertasGeral" data-layer="area_risco_sem_indice_geral" class="sub-menu">
+                                            <div class="iconfont noselect notap">I</div>
+                                            <div class="menu-text noselect notap">Sem Índice</div>
+                                        </li>                                                                     
+
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!--legenda iantividade por tempo-->                              
+                            <div id="legenda-dias-inatividade" class='my-legend legenda-mapa'>                                
+                                <div class='legend-title'>Dias de Inatividade</div>
+                                <div class='legend-scale'>
+                                    <ul class='legend-labels'>
+                                        <li><span style='background:#9b9b9b;'></span>0</li>
+                                        <label id="inatividade0" style="position: relative;left: 80%;top: 11.5%;font-weight: bold;"></label> 
+
+                                        <li><span style='background:#fff900;'></span>1-30</li>
+                                        <label id="inatividade1" style="position: relative;left: 80%;top: 22.5%;font-weight: bold;"></label> 
+
+                                        <li><span style='background:#ffc700;'></span>31-60</li>
+                                        <label id="inatividade2" style="position: relative;left: 80%;top: 32.5%;font-weight: bold;"></label> 
+
+                                        <li><span style='background:#ff8300;'></span>61-90</li>
+                                        <label id="inatividade3" style="position: relative;left: 80%;top: 43.5%;font-weight: bold;"></label> 
+
+                                        <li><span style='background:#f75718;'></span>91-300</li>
+                                        <label id="inatividade4" style="position: relative;left: 80%;top: 54.5%;font-weight: bold;"></label> 
+
+                                        <li><span style='background:#FF0000;'></span>301-600</li>
+                                        <label id="inatividade5" style="position: relative;left: 80%;top: 64.5%;font-weight: bold;"></label> 
+
+                                        <li><span style='background:#990000;'></span>600+</li>
+                                        <label id="inatividade7"  style="position: relative;left: 80%;top: 74.5%;font-weight: bold;"></label> 
+
+                                        <li><span style='background:#191919;'></span>NC</li>
+                                        <label id="inatividade6" style="position: relative;left: 80%;top: 86.5%;font-weight: bold;"></label> 
+                                    </ul>
+                                </div>                                
+                            </div>  
+                            <!--legenda iantividade por tempo-->
+                        </div>
+                        <!--MAPA GERAL-->
+                        
+                        <!--popup geral-->
+                        <div id="popup-geral" class="ol-popup">
+                            <a href="#" id="popup-closer-geral" class="ol-popup-closer" style="color: white" ></a>
+                            <div id="popup-content-geral" class="scroll pulsating-icon" style="font-size: 13px"></div>
+                        </div>
+
+                        <!--popup onHover geral-->
+                        <div id="popup-hover-geral" class="ol-popup">
+                            <a href="#" id="popup-closer-hover-geral" class="ol-popup-closer" style="color: white" ></a>
+                            <div id="infoPcdGeral" class="scroll pulsating-icon" style="font-size: 13px"></div>
+                        </div> 
+                    </div>
+                    <!-- END PAGINA 1-->                                                                                                  
+
+                    <!-- START CAROUSEL REDE PCDS PLUVIO-->
+                    <div id="pagina-2" class="item" style="width: 100%; height: 100%">
+                        <ul class="x-navigation x-navigation-panel" style="height: 50px;background: linear-gradient(#00b2dd 0%, #ffffff00 100%)"></ul>
+                            <div class="row">
+                                <div class="col-md-12" style="bottom: 65px; height: 0px;">
+                                    <div class="title-position">
+                                            <h1 style="margin-top: 0px; margin-bottom: 0px;font-weight: 500; position: relative; top: 18px">Rede Pluviométrica</h1>                                        
+                                    </div>
+                                </div>
+                            </div>
+                        
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <a><img id="logo-cemaden-geo" class="logo-cemaden" onclick="gotoSlide(0)" style="cursor: pointer" src="resources/img/CemadenLog.png"/></a>
+                            </div>
+                            
+                            <!--ATIVAS PLUVIO--> 
+                            <div class="col-sm-1">
+                                <div class="titulo-info-grafico">Ativa</div>
+                                <label id="outPut-OperacionalGeralPluvio" class="numero-info-grafico"/>
+                            </div>
+                            
+                            <!--SUSPEITAS PLUVIO-->
+                            <div class="col-sm-1">
+                                <div class="titulo-info-grafico">Suspeita</div>
+                                <label id="outPut-SuspeitasGeralPluvio" class="numero-info-grafico"/>
+                            </div>
+                            
+                            <!--INATIVAS PLUVIO-->
+                            <div class="col-sm-1">
+                                <div class="titulo-info-grafico">Inativa</div>
+                                <label id="outPut-InativasGeralPluvio" class="numero-info-grafico"/>
+                            </div>
+                            
+                            <!--DESABILITADA PLUVIO-->
+                            <div class="col-sm-2">
+                                <div class="titulo-info-grafico">Desabilitadas</div>
+                                <label id="outPut-DesabilitadasGeralPluvio" class="numero-info-grafico"/>
+                            </div>
+                            
+                            <div class="col-sm-2">
+                                <img title="Voltar a Tela Principal" onclick="gotoSlide(0)" class="icon-estacao-rede" src="resources/img/Pluvio.png"/>
+                            </div>
+                            
+                        </div>
+                        
+                        <!--GRAFICO REDE PLUVIO-->
+                        <div class="col-md-8" style="bottom: 40px">
+                                <div id="table-container-rede-pluvio" style="height: 400px; margin: 36px auto"></div>
+                                <div id="table-container-inatividade-rede-pluvio" style=" height: 370px; margin: 0px auto"></div>                            
+                            </div>                                   
+                        <!--GRAFICO REDE PLUVIO-->                                                
+
+                        <!--MAPA PLUVIO-->
+                        <div class="col-md-4" style="bottom: 0px">                            
+                            <div class="col-sm">                                                                    
+                                <div id="map1" style="box-shadow: 1px 1px 7px #00000052"></div>                                                                                               	
+                            </div>                          
+
+                            <!--MENU DE CAMADAS PLUVIO-->
+                            <div id="detail-rhpane-wrapper-pluvio">
+                                <div id="rhpanePluvio">
+                                    <ul id="overlayPluvio" data-ref="overlayPluvio" class="menu iconsize-19">
+                                        <li data-parent="cemadenPluvio" class="selected">
+                                            <div class="iconfont noselect notap" style=" background: #00b2dd;box-shadow: 0px 0px 1px rgba(0,0,0,0.63);color: white;">P</div>
+                                            <div class="menu-text noselect notap">Pluviométrica</div>
+                                        </li>                                    					
+                                        <li data-parent="cemadenPluvio" data-layer="ativa_pluvio" class="sub-menu menu-unfold">
+                                            <div class="iconfont noselect notap">A</div>
+                                            <div class="menu-text noselect notap">Ativas</div>
+                                        </li>
+                                        <li data-parent="cemadenPluvio" data-layer="suspeita_pluvio" class="sub-menu menu-unfold">
+                                            <div class="iconfont noselect notap">S</div>
+                                            <div class="menu-text noselect notap">Suspeita</div>
+                                        </li>
+                                        <li data-parent="cemadenPluvio" data-layer="inatividade_pluvio" class="sub-menu menu-unfold mark_selected_inativas">
+                                            <div class="iconfont noselect notap">I</div>
+                                            <div class="menu-text noselect notap">Inativas</div>
+                                        </li>
+
+                                        <li id="inatividade-tempo-pluvio" data-parent="cemadenPluvio" data-layer="inatividade_pluvio_tempo" class="sub-menu menu-unfold">
+                                            <div class="iconfont noselect notap">IT</div>
+                                            <div class="menu-text noselect notap">Inatividade por Tempo</div>
+                                        </li>
+
+                                        <li data-parent="cemadenPluvio" data-layer="desabilitada_pluvio" class="sub-menu menu-unfold">
+                                            <div class="iconfont noselect notap">D</div>
+                                            <div class="menu-text noselect notap">Desabilitada</div>
+                                        </li>
+
+                                        <!--Operadoras-->
+                                        <li data-parent="chipOperadoraPluvio" class="">
+                                            <div class="iconfont noselect notap">OP</div>
+                                            <div class="menu-text noselect notap">Inatividade Chip - Últimas 24h</div>
+                                        </li>                                                                       
+
+                                        <li data-parent="chipOperadoraPluvio" data-layer="chip_inativo_vodafone_pluvio" class="sub-menu">
+                                            <div class="iconfont noselect notap">V</div>
+                                            <div class="menu-text noselect notap">Vodafone</div>
+                                        </li>
+                                        <li data-parent="chipOperadoraPluvio" data-layer="chip_inativo_oi_pluvio" class="sub-menu">
+                                            <div class="iconfont noselect notap">Oi</div>
+                                            <div class="menu-text noselect notap">Oi</div>
+                                        </li>    
+                                        <li data-parent="chipOperadoraPluvio" data-layer="chip_inativo_vivo_pluvio" class="sub-menu">
+                                            <div class="iconfont noselect notap">Vi</div>
+                                            <div class="menu-text noselect notap">Vivo</div>
+                                        </li> 
+                                        <li data-parent="chipOperadoraPluvio" data-layer="chip_inativo_claro_pluvio" class="sub-menu">
+                                            <div class="iconfont noselect notap">CL</div>
+                                            <div class="menu-text noselect notap">Claro</div>
+                                        </li>
+                                         
+                                        <li data-parent="chipOperadoraPluvio" data-layer="chip_inativo_tim_pluvio" class="sub-menu">
+                                            <div class="iconfont noselect notap">T</div>
+                                            <div class="menu-text noselect notap">Tim</div>
+                                        </li>
+                                        
+                                        <li data-parent="chipOperadoraPluvio" data-layer="chip_inativo_null_pluvio" class="sub-menu">
+                                            <div class="iconfont noselect notap">SC</div>
+                                            <div class="menu-text noselect notap">Sem chip</div>
+                                        </li>                                        
+                                        <!--Operadoras-->                                        
+                                        
+                                        <li data-parent="alertasPluvio" class="">
+                                            <div class="iconfont noselect notap">AR</div>
+                                            <div class="menu-text noselect notap">Áreas de Risco</div>
+                                        </li>                                                                       
+
+                                        <li data-parent="alertasPluvio" data-layer="risco_hidrologico" class="sub-menu">
+                                            <div class="iconfont noselect notap">H</div>
+                                            <div class="menu-text noselect notap">Hidro</div>
+                                        </li>                                     
+                                        <li data-parent="alertasPluvio" data-layer="risco_geologico" class="sub-menu">
+                                            <div class="iconfont noselect notap">G</div>
+                                            <div class="menu-text noselect notap">Geológico</div>
+                                        </li> 
+                                        <li data-parent="alertasPluvio" data-layer="area_risco_sem_indice" class="sub-menu">
+                                            <div class="iconfont noselect notap">I</div>
+                                            <div class="menu-text noselect notap">Sem Índice</div>
+                                        </li>                                                                     
+
+                                    </ul>
+                                </div>
+                            </div>
+                            <!--MENU DE CAMADAS PLUVIO-->
+                            
+                            <!--legenda inatividade por tempo pluvio-->                              
+                            <div id="legenda-dias-inatividade-pluvio" class='my-legend legenda-mapa'>                                
+                                <div class='legend-title'>Dias de Inatividade</div>
+                                <div class='legend-scale'>
+                                    <ul class='legend-labels'>
+                                        <li><span style='background:#9b9b9b;'></span>0</li>
+                                        <label id="inatividade-p0" style="position: relative;left: 80%;top: 11.5%;font-weight: bold;"></label> 
+
+                                        <li><span style='background:#fff900;'></span>1-30</li>
+                                        <label id="inatividade-p1" style="position: relative;left: 80%;top: 22.5%;font-weight: bold;"></label> 
+
+                                        <li><span style='background:#ffc700;'></span>31-60</li>
+                                        <label id="inatividade-p2" style="position: relative;left: 80%;top: 32.5%;font-weight: bold;"></label> 
+
+                                        <li><span style='background:#ff8300;'></span>61-90</li>
+                                        <label id="inatividade-p3" style="position: relative;left: 80%;top: 43.5%;font-weight: bold;"></label> 
+
+                                        <li><span style='background:#f75718;'></span>91-300</li>
+                                        <label id="inatividade-p4" style="position: relative;left: 80%;top: 54.5%;font-weight: bold;"></label> 
+
+                                        <li><span style='background:#FF0000;'></span>301-600</li>
+                                        <label id="inatividade-p5" style="position: relative;left: 80%;top: 64.5%;font-weight: bold;"></label> 
+
+                                        <li><span style='background:#990000;'></span>600+</li>
+                                        <label id="inatividade-p6"  style="position: relative;left: 80%;top: 74.5%;font-weight: bold;"></label> 
+
+                                        <li><span style='background:#191919;'></span>NC</li>
+                                        <label id="inatividade-p7" style="position: relative;left: 80%;top: 86.5%;font-weight: bold;"></label> 
+                                    </ul>
+                                </div>                                
+                            </div>                                                                                  
+                        </div>  
+                        <!--MAPA PLVIO-->
+                        
+                        <!--popup pluvio-->
+                        <div id="popup" class="ol-popup">
+                            <a href="#" id="popup-closer" class="ol-popup-closer" style="color: white" ></a>
+                            <div id="popup-content" class="scroll pulsating-icon" style="font-size: 13px"></div>
+                        </div>
+
+                        <!--popup onHover pluvio-->
+                        <div id="popup-hover-pluvio" class="ol-popup">
+                            <a href="#" id="popup-closer-hover-pluvio" class="ol-popup-closer" style="color: white" ></a>
+                            <div id="infoPcdPluvio" class="scroll pulsating-icon" style="font-size: 13px"></div>
+                        </div>
+                    </div>
+                    <!-- END CAROUSEL REDE PCDS PLUVIO--> 
+
+                    <!--START CAROUSEL REDE ACQUA -->
+                    <div id="pagina-3" class="item" style="width: 100%; height: 100%">
+                        <ul class="x-navigation x-navigation-horizontal x-navigation-panel" style="height: 50px;background: linear-gradient(#face51 0%, #ffffff00 100%);"></ul>
+                        <div class="row">                            
+                            <div class="col-md-12" style="bottom: 65px; height: 0px;">    
+                                <div class="title-position">
+                                    <h1 style="margin-top: 0px; margin-bottom: 0px;font-weight: 500; position: relative; top: 18px">Rede Semiárido(Acqua)</h1>
+                                </div>                            
+                            </div>
+                        </div>
+
+                        <div class="row">                            
+                            <div class="col-sm-2">
+                                <a><img id="logo-cemaden-geo" class="logo-cemaden" onclick="gotoSlide(0)" style="cursor: pointer" src="resources/img/CemadenLog.png"/></a>
+                            </div>
+                            
+                            <!--ATIVAS ACQUA--> 
+                            <div class="col-sm-1">
+                                <div class="titulo-info-grafico">Ativa</div>
+                                <label id="outPut-OperacionalGeralAcqua" class="numero-info-grafico"/>
+                            </div>
+
+                            <!--SUSPEITAS ACQUA-->
+                            <div class="col-sm-1">
+                                <div class="titulo-info-grafico">Suspeita</div>
+                                <label id="outPut-SuspeitasGeralAcqua" class="numero-info-grafico"/>
+                            </div>
+                            
+                            <!--INATIVAS ACQUA-->
+                            <div class="col-sm-1">
+                                <div class="titulo-info-grafico">Inativa</div>
+                                <label id="outPut-InativasGeralAcqua" class="numero-info-grafico"/>
+                            </div>
+                            
+                            <!--DESABILITADAS ACQUA-->
+                            <div class="col-sm-2">
+                                <div class="titulo-info-grafico">Desabilitadas</div>
+                                <label id="outPut-DesabilitadasGeralAcqua" class="numero-info-grafico"/>
+                            </div>
+                            
+                            <div class="col-sm-2">
+                                <img title="Voltar a Tela Principal" onclick="gotoSlide(0)" class="icon-estacao-rede" src="resources/img/Acqua.png"/>
+                            </div>                                                                
+                        </div>                        
+
+                        <!--GRAFICO REDE ACQUA-->
+                        <div class="col-md-8" style="bottom: 40px">
+                            <div id="table-container-rede-acqua" style="height: 400px; margin: 36px auto"></div>
+                            <div id="table-container-inatividade-rede-acqua" style="height: 370px; margin: 0px auto"></div>
+                        </div>
+                        <!--GRAFICO REDE ACQUA-->
+
+                        <!--MAPA ACQUA-->
+                        <div class="col-md-4" style="bottom: 0px">                                                        
+                            <div class="col-sm">                                                                    
+                                <div id="map2" style="box-shadow: 1px 1px 7px #00000052"></div>                                                                                               	
+                            </div> 
+                            
+                            <!--MENU DE CAMADAS ACQUA-->
+                            <div id="detail-rhpane-wrapper-acqua">
+                                <div id="rhpaneAcqua">
+                                    <ul id="overlayAcqua" data-ref="overlayAcqua" class="menu iconsize-19">
+                                        <li data-parent="cemadenAcqua" class="selected">
+                                            <div class="iconfont noselect notap" style=" background: #fecf44;box-shadow: 0px 0px 1px rgba(0,0,0,0.63);color: white;">A</div>
+                                            <div class="menu-text noselect notap">Acqua</div>
+                                        </li>                                    					
+                                        <li data-parent="cemadenAcqua" data-layer="ativa_acqua" class="sub-menu menu-unfold">
+                                            <div class="iconfont noselect notap">A</div>
+                                            <div class="menu-text noselect notap">Ativas</div>
+                                        </li>
+                                        <li data-parent="cemadenAcqua" data-layer="suspeita_acqua" class="sub-menu menu-unfold">
+                                            <div class="iconfont noselect notap">S</div>
+                                            <div class="menu-text noselect notap">Suspeita</div>
+                                        </li>
+                                        <li data-parent="cemadenAcqua" data-layer="inatividade_acqua" class="sub-menu menu-unfold mark_selected_inativas">
+                                            <div class="iconfont noselect notap">I</div>
+                                            <div class="menu-text noselect notap">Inativas</div>
+                                        </li>
+
+                                        <li id="inatividade-tempo-acqua" data-parent="cemadenAcqua" data-layer="inatividade_acqua_tempo" class="sub-menu menu-unfold">
+                                            <div class="iconfont noselect notap">IT</div>
+                                            <div class="menu-text noselect notap">Inatividade por Tempo</div>
+                                        </li>
+
+                                        <li data-parent="cemadenAcqua" data-layer="desabilitada_acqua" class="sub-menu menu-unfold">
+                                            <div class="iconfont noselect notap">D</div>
+                                            <div class="menu-text noselect notap">Desabilitada</div>
+                                        </li>
+                                        
+                                        <!--Operadoras-->
+                                        <li data-parent="chipOperadoraAcqua" class="">
+                                            <div class="iconfont noselect notap">OP</div>
+                                            <div class="menu-text noselect notap">Inatividade Chip - Últimas 24h</div>
+                                        </li>                                                                       
+
+                                        <li data-parent="chipOperadoraAcqua" data-layer="chip_inativo_vodafone_acqua" class="sub-menu">
+                                            <div class="iconfont noselect notap">V</div>
+                                            <div class="menu-text noselect notap">Vodafone</div>
+                                        </li>
+                                        <li data-parent="chipOperadoraAcqua" data-layer="chip_inativo_oi_acqua" class="sub-menu">
+                                            <div class="iconfont noselect notap">Oi</div>
+                                            <div class="menu-text noselect notap">Oi</div>
+                                        </li>    
+                                        <li data-parent="chipOperadoraAcqua" data-layer="chip_inativo_vivo_acqua" class="sub-menu">
+                                            <div class="iconfont noselect notap">Vi</div>
+                                            <div class="menu-text noselect notap">Vivo</div>
+                                        </li> 
+                                        <li data-parent="chipOperadoraAcqua" data-layer="chip_inativo_claro_acqua" class="sub-menu">
+                                            <div class="iconfont noselect notap">CL</div>
+                                            <div class="menu-text noselect notap">Claro</div>
+                                        </li>
+                                         
+                                        <li data-parent="chipOperadoraAcqua" data-layer="chip_inativo_tim_acqua" class="sub-menu">
+                                            <div class="iconfont noselect notap">T</div>
+                                            <div class="menu-text noselect notap">Tim</div>
+                                        </li>
+                                        
+                                        <li data-parent="chipOperadoraAcqua" data-layer="chip_inativo_null_acqua" class="sub-menu">
+                                            <div class="iconfont noselect notap">SC</div>
+                                            <div class="menu-text noselect notap">Sem chip</div>
+                                        </li>
+                                        
+                                        <!--Operadoras-->
+
+                                        <li data-parent="alertasAcqua" class="">
+                                            <div class="iconfont noselect notap">AR</div>
+                                            <div class="menu-text noselect notap">Áreas de Risco</div>
+                                        </li>                                                                       
+
+                                        <li data-parent="alertasAcqua" data-layer="risco_hidrologico_acqua" class="sub-menu">
+                                            <div class="iconfont noselect notap">H</div>
+                                            <div class="menu-text noselect notap">Hidro</div>
+                                        </li> 
+                                        <li data-parent="alertasAcqua" data-layer="risco_geologico_acqua" class="sub-menu">
+                                            <div class="iconfont noselect notap">G</div>
+                                            <div class="menu-text noselect notap">Geológico</div>
+                                        </li> 
+                                        <li data-parent="alertasAcqua" data-layer="area_risco_sem_indice_acqua" class="sub-menu">
+                                            <div class="iconfont noselect notap">I</div>
+                                            <div class="menu-text noselect notap">Sem Índice</div>
+                                        </li>                                                                     
+
+                                    </ul>
+                                </div>
+                            </div>
+                            <!--MENU DE CAMADA ACQUA-->
+                            
+                            <!--legenda tempo inatividade acqua-->
+                            <div id="legenda-dias-inatividade-acqua" class='my-legend legenda-mapa'>                                
+                                <div class='legend-title'>Dias de Inatividade</div>
+                                <div class='legend-scale'>
+                                    <ul class='legend-labels'>
+                                        <li><span style='background:#9b9b9b;'></span>0</li>
+                                        <label id="inatividade-a0" style="position: relative;left: 80%;top: 11.5%;font-weight: bold;"></label> 
+
+                                        <li><span style='background:#fff900;'></span>1-30</li>
+                                        <label id="inatividade-a1" style="position: relative;left: 80%;top: 22.5%;font-weight: bold;"></label> 
+
+                                        <li><span style='background:#ffc700;'></span>31-60</li>
+                                        <label id="inatividade-a2" style="position: relative;left: 80%;top: 32.5%;font-weight: bold;"></label> 
+
+                                        <li><span style='background:#ff8300;'></span>61-90</li>
+                                        <label id="inatividade-a3" style="position: relative;left: 80%;top: 43.5%;font-weight: bold;"></label> 
+
+                                        <li><span style='background:#f75718;'></span>91-300</li>
+                                        <label id="inatividade-a4" style="position: relative;left: 80%;top: 54.5%;font-weight: bold;"></label> 
+
+                                        <li><span style='background:#FF0000;'></span>301-600</li>
+                                        <label id="inatividade-a5" style="position: relative;left: 80%;top: 64.5%;font-weight: bold;"></label> 
+
+                                        <li><span style='background:#990000;'></span>600+</li>
+                                        <label id="inatividade-a6"  style="position: relative;left: 80%;top: 74.5%;font-weight: bold;"></label> 
+
+                                        <li><span style='background:#191919;'></span>NC</li>
+                                        <label id="inatividade-a7" style="position: relative;left: 80%;top: 86.5%;font-weight: bold;"></label> 
+                                    </ul>
+                                </div>                                
+                            </div> 
+                            <!--legenda tempo inatividade acqua-->
+                        </div>
+                        <!--MAPA ACQUA-->
+                        
+                        <!--popup acqua-->
+                        <div id="popup-acqua" class="ol-popup">
+                            <a href="#" id="popup-closer-acqua" class="ol-popup-closer" style="color: white" ></a>
+                            <div id="popup-content-acqua" class="scroll pulsating-icon" style="font-size: 13px"></div>
+                        </div>   
+
+                        <!--popup onHover acqua-->
+                        <div id="popup-hover-acqua" class="ol-popup">
+                            <a href="#" id="popup-closer-hover-acqua" class="ol-popup-closer" style="color: white" ></a>
+                            <div id="infoPcdAcqua" class="scroll pulsating-icon" style="font-size: 13px"></div>
+                        </div>  
+                        
+                    </div>
+                    <!-- END CAROUSEL REDE ACQUA-->
+
+
+                    <!--START CAROUSEL REDE AGROMETEOROLÓGICA -->
+                    <div id="pagina-4" class="item" style="width: 100%; height: 100%">
+                        <ul class="x-navigation x-navigation-horizontal x-navigation-panel" style="height: 50px;background: linear-gradient(#00b298 0%, #ffffff00 100%);"></ul>
+                        <div class="row">                            
+                            <div class="col-md-12" style="bottom: 65px; height: 0px;">    
+                                <div class="title-position">
+                                    <h1 style="margin-top: 0px; margin-bottom: 0px;font-weight: 500; position: relative; top: 18px"> Rede Semiárido(Agrometeorológica)</h1>                                    
+                                </div>  
+                            </div>
+                        </div>
+
+                        <div class="row">                            
+                            <div class="col-sm-2">
+                                <a><img id="logo-cemaden-geo" class="logo-cemaden" onclick="gotoSlide(0)" style="cursor: pointer" src="resources/img/CemadenLog.png"/></a>
+                            </div>
+                            
+                            <!--ATIVAS AGRO--> 
+                            <div class="col-sm-1">
+                                <div class="titulo-info-grafico">Ativa</div>
+                                <label id="outPut-OperacionalGeralAgro" class="numero-info-grafico"/>
+                            </div>
+
+                            <!--SUSPEITAS AGRO-->
+                            <div class="col-sm-1">
+                                <div class="titulo-info-grafico">Suspeita</div>
+                                <label id="outPut-SuspeitasGeralAgro" class="numero-info-grafico"/>
+                            </div>
+                            
+                            <!--INATIVAS AGRO-->
+                            <div class="col-sm-1">
+                                <div class="titulo-info-grafico">Inativa</div>
+                                <label id="outPut-InativasGeralAgro" class="numero-info-grafico"/>
+                            </div>
+                            
+                            <!--DESABILITADAS AGRO-->
+                            <div class="col-sm-2">
+                                <div class="titulo-info-grafico">Desabilitadas</div>
+                                <label id="outPut-DesabilitadasGeralAgro" class="numero-info-grafico"/>
+                            </div>
+                            
+                            <div class="col-sm-2">
+                                <img title="Voltar a Tela Principal" onclick="gotoSlide(0)" class="icon-estacao-rede" src="resources/img/Agro.png"/>
+                            </div>                                                                
+                        </div>
+
+                        <!--GRAFICO REDE AGROMETEOROLÓGICA-->
+                        <div class="col-md-8" style="bottom: 40px">
+                            <div id="table-container-rede-agro" style="height: 400px; margin: 36px auto"></div>
+                            <div id="table-container-inatividade-rede-agro" style="height: 370px; margin: 0px auto"></div>
+                        </div>
+                        <!--GRAFICO REDE AGROMETEOROLÓGICA-->
+
+                        <!--MAPA AGRO-->
+                        <div class="col-md-4" style="bottom: 0px">                            
+                            <div class="col-sm">                                                                    
+                                <div id="map3" style="box-shadow: 1px 1px 7px #00000052"></div>                                                                                               	
+                            </div> 
+                            
+                            <!--MENU DE CAMADAS AGRO-->
+                            <div id="detail-rhpane-wrapper-agro">
+                                <div id="rhpaneAgro">
+                                    <ul id="overlayAgro" data-ref="overlayAgro" class="menu iconsize-19">
+                                        <li data-parent="cemadenAgro" class="selected">
+                                            <div class="iconfont noselect notap" style=" background: #00b297;box-shadow: 0px 0px 1px rgba(0,0,0,0.63);color: white;">AG</div>
+                                            <div class="menu-text noselect notap">Agrometeorológica</div>
+                                        </li>                                    					
+                                        <li data-parent="cemadenAgro" data-layer="ativa_agro" class="sub-menu menu-unfold">
+                                            <div class="iconfont noselect notap">A</div>
+                                            <div class="menu-text noselect notap">Ativas</div>
+                                        </li>
+                                        <li data-parent="cemadenAgro" data-layer="suspeita_agro" class="sub-menu menu-unfold">
+                                            <div class="iconfont noselect notap">S</div>
+                                            <div class="menu-text noselect notap">Suspeita</div>
+                                        </li>
+                                        <li data-parent="cemadenAgro" data-layer="inatividade_agro" class="sub-menu menu-unfold mark_selected_inativas">
+                                            <div class="iconfont noselect notap">I</div>
+                                            <div class="menu-text noselect notap">Inativas</div>
+                                        </li>
+
+                                        <li id="inatividade-tempo-agro" data-parent="cemadenAgro" data-layer="inatividade_agro_tempo" class="sub-menu menu-unfold">
+                                            <div class="iconfont noselect notap">IT</div>
+                                            <div class="menu-text noselect notap">Inatividade por Tempo</div>
+                                        </li>
+
+                                        <li data-parent="cemadenAgro" data-layer="desabilitada_agro" class="sub-menu menu-unfold">
+                                            <div class="iconfont noselect notap">D</div>
+                                            <div class="menu-text noselect notap">Desabilitada</div>
+                                        </li>
+                                        
+                                        <!--Operadoras-->
+                                        <li data-parent="chipOperadoraAgro" class="">
+                                            <div class="iconfont noselect notap">OP</div>
+                                            <div class="menu-text noselect notap">Inatividade Chip - Últimas 24h</div>
+                                        </li>                                                                       
+
+                                        <li data-parent="chipOperadoraAgro" data-layer="chip_inativo_vodafone_agro" class="sub-menu">
+                                            <div class="iconfont noselect notap">V</div>
+                                            <div class="menu-text noselect notap">Vodafone</div>
+                                        </li>
+                                        <li data-parent="chipOperadoraAgro" data-layer="chip_inativo_oi_agro" class="sub-menu">
+                                            <div class="iconfont noselect notap">Oi</div>
+                                            <div class="menu-text noselect notap">Oi</div>
+                                        </li>    
+                                        <li data-parent="chipOperadoraAgro" data-layer="chip_inativo_vivo_agro" class="sub-menu">
+                                            <div class="iconfont noselect notap">Vi</div>
+                                            <div class="menu-text noselect notap">Vivo</div>
+                                        </li> 
+                                        <li data-parent="chipOperadoraAgro" data-layer="chip_inativo_claro_agro" class="sub-menu">
+                                            <div class="iconfont noselect notap">CL</div>
+                                            <div class="menu-text noselect notap">Claro</div>
+                                        </li>
+                                         
+                                        <li data-parent="chipOperadoraAgro" data-layer="chip_inativo_tim_agro" class="sub-menu">
+                                            <div class="iconfont noselect notap">T</div>
+                                            <div class="menu-text noselect notap">Tim</div>
+                                        </li>
+                                        
+                                        <li data-parent="chipOperadoraAgro" data-layer="chip_inativo_null_agro" class="sub-menu">
+                                            <div class="iconfont noselect notap">SC</div>
+                                            <div class="menu-text noselect notap">Sem chip</div>
+                                        </li>                                        
+                                        <!--Operadoras-->
+                                        
+                                        <li data-parent="alertasAgro" class="">
+                                            <div class="iconfont noselect notap">AR</div>
+                                            <div class="menu-text noselect notap">Áreas de Risco</div>
+                                        </li>
+
+                                        <li data-parent="alertasAgro" data-layer="risco_hidrologico_agro" class="sub-menu">
+                                            <div class="iconfont noselect notap">H</div>
+                                            <div class="menu-text noselect notap">Hidro</div>
+                                        </li>
+                                        <li data-parent="alertasAgro" data-layer="risco_geologico_agro" class="sub-menu">
+                                            <div class="iconfont noselect notap">G</div>
+                                            <div class="menu-text noselect notap">Geológico</div>
+                                        </li>
+                                        <li data-parent="alertasAgro" data-layer="area_risco_sem_indice_agro" class="sub-menu">
+                                            <div class="iconfont noselect notap">I</div>
+                                            <div class="menu-text noselect notap">Sem Índice</div>
+                                        </li>                                                                     
+
+                                    </ul>
+                                </div>
+                            </div>
+                            <!--MENU DE CAMADAS AGRO-->
+
+                            <!--legenda tempo inatividade agro-->
+                            <div id="legenda-dias-inatividade-agro" class='my-legend legenda-mapa'>                                
+                                <div class='legend-title'>Dias de Inatividade</div>
+                                <div class='legend-scale'>
+                                    <ul class='legend-labels'>
+                                        <li><span style='background:#9b9b9b;'></span>0</li>
+                                        <label id="inatividade-ag0" style="position: relative;left: 80%;top: 11.5%;font-weight: bold;"></label> 
+
+                                        <li><span style='background:#fff900;'></span>1-30</li>
+                                        <label id="inatividade-ag1" style="position: relative;left: 80%;top: 22.5%;font-weight: bold;"></label> 
+
+                                        <li><span style='background:#ffc700;'></span>31-60</li>
+                                        <label id="inatividade-ag2" style="position: relative;left: 80%;top: 32.5%;font-weight: bold;"></label> 
+
+                                        <li><span style='background:#ff8300;'></span>61-90</li>
+                                        <label id="inatividade-ag3" style="position: relative;left: 80%;top: 43.5%;font-weight: bold;"></label> 
+
+                                        <li><span style='background:#f75718;'></span>91-300</li>
+                                        <label id="inatividade-ag4" style="position: relative;left: 80%;top: 54.5%;font-weight: bold;"></label> 
+
+                                        <li><span style='background:#FF0000;'></span>301-600</li>
+                                        <label id="inatividade-ag5" style="position: relative;left: 80%;top: 64.5%;font-weight: bold;"></label> 
+
+                                        <li><span style='background:#990000;'></span>600+</li>
+                                        <label id="inatividade-ag6"  style="position: relative;left: 80%;top: 74.5%;font-weight: bold;"></label> 
+
+                                        <li><span style='background:#191919;'></span>NC</li>
+                                        <label id="inatividade-ag7" style="position: relative;left: 80%;top: 86.5%;font-weight: bold;"></label> 
+                                    </ul>
+                                </div>                                
+                            </div>
+                             <!--legenda tempo inatividade agro-->
+                        </div>
+                        <!--MAPA AGRO-->
+
+                        <!--popup agro-->
+                        <div id="popup-agro" class="ol-popup">
+                            <a href="#" id="popup-closer-agro" class="ol-popup-closer" style="color: white" ></a>
+                            <div id="popup-content-agro" class="scroll pulsating-icon" style="font-size: 13px"></div>
+                        </div>
+
+                        <!--popup onHover agro-->
+                        <div id="popup-hover-agro" class="ol-popup">
+                            <a href="#" id="popup-closer-hover-agro" class="ol-popup-closer" style="color: white" ></a>
+                            <div id="infoPcdAgro" class="scroll pulsating-icon" style="font-size: 13px"></div>
+                        </div>                          
+                    </div>
+                    <!-- END CAROUSEL REDE AGROMETEOROLÓGICA-->
+
+                    <!--START CAROUSEL REDE HIDRO -->
+                    <div id="pagina-5" class="item" style="width: 100%; height: 100%">
+                        <ul class="x-navigation x-navigation-horizontal x-navigation-panel" style="height: 50px;background: linear-gradient(#ff5e68 0%, #ffffff00 100%);"></ul>
+                        <div class="row">                            
+                            <div class="col-md-12" style="bottom: 65px; height: 0px;">
+                                <div class="title-position">                                    
+                                    <h1 style="margin-top: 0px; margin-bottom: 0px;font-weight: 500; position: relative; top: 18px">Rede Hidrológica</h1>                                    
+                                </div>  
+                            </div>                                                                                    
+                        </div>   
+                     
+
+                        <div class="row">                            
+                            <div class="col-sm-2">
+                                <a><img id="logo-cemaden-geo" class="logo-cemaden" onclick="gotoSlide(0)" style="cursor: pointer" src="resources/img/CemadenLog.png"/></a>
+                            </div>
+                            
+                            <!--ATIVAS HIDRO--> 
+                            <div class="col-sm-1">
+                                <div class="titulo-info-grafico">Ativa</div>
+                                <label id="outPut-OperacionalGeralHidro" class="numero-info-grafico"/>
+                            </div>
+
+                            <!--SUSPEITAS HIDRO-->
+                            <div class="col-sm-1">
+                                <div class="titulo-info-grafico">Suspeita</div>
+                                <label id="outPut-SuspeitasGeralHidro" class="numero-info-grafico"/>
+                            </div>
+                            
+                            <!--INATIVAS HIDRO-->
+                            <div class="col-sm-1">
+                                <div class="titulo-info-grafico">Inativa</div>
+                                <label id="outPut-InativasGeralHidro" class="numero-info-grafico"/>
+                            </div>
+                            
+                            <!--DESABILITADAS HIDRO-->
+                            <div class="col-sm-2">
+                                <div class="titulo-info-grafico">Desabilitadas</div>
+                                <label id="outPut-DesabilitadasGeralHidro" class="numero-info-grafico"/>
+                            </div>
+                            
+                            <div class="col-sm-2">
+                                <img title="Voltar a Tela Principal" onclick="gotoSlide(0)" class="icon-estacao-rede" src="resources/img/Hidro.png"/>
+                            </div>                                                                
+                        </div>
+
+                        <!--START GRAFICO REDE HIDROLÓGICAS-->
+                        <div class="col-md-8" style="bottom: 40px">
+                            <div id="table-container-rede-hidro" style="height: 400px; margin: 36px auto"></div>                            
+                            <div id="table-container-inatividade-rede-hidro" style="height: 370px; margin: 0px auto"></div>
+                        </div>
+                        <!--END GRAFICO REDE HIDRO-->
+
+                        <!--MAPA HIDRO-->
+                        <div class="col-md-4" style="bottom: 0px">                            
+                            <div class="col-sm">                                                                    
+                                <div id="map4" style="box-shadow: 1px 1px 7px #00000052"></div>                                                                                               	
+                            </div> 
+                                                        
+                            <!--MENU DE CAMADAS HIDRO-->
+                            <div id="detail-rhpane-wrapper-hidro">
+                                <section id="rhpaneHidro">
+                                    <ul id="overlayHidro" data-ref="overlayHidro" class="menu iconsize-19">
+                                        <li data-parent="cemadenHidro" class="selected">
+                                            <div class="iconfont noselect notap" style=" background: #f25d59;box-shadow: 0px 0px 1px rgba(0,0,0,0.63);color: white;">H</div>
+                                            <div class="menu-text noselect notap">Hidrológica</div>
+                                        </li>
+
+                                        <li data-parent="cemadenHidro" data-layer="ativa_hidro" class="sub-menu menu-unfold">
+                                            <div class="iconfont noselect notap">A</div>
+                                            <div class="menu-text noselect notap">Ativas</div>
+                                        </li>
+                                        <li data-parent="cemadenHidro" data-layer="suspeita_hidro" class="sub-menu menu-unfold">
+                                            <div class="iconfont noselect notap">S</div>
+                                            <div class="menu-text noselect notap">Suspeita</div>
+                                        </li>
+                                        <li data-parent="cemadenHidro" data-layer="inatividade_hidro" class="sub-menu menu-unfold mark_selected_inativas">
+                                            <div class="iconfont noselect notap">I</div>
+                                            <div class="menu-text noselect notap">Inativas</div>
+                                        </li>
+
+                                        <li id="inatividade-tempo-hidro" data-parent="cemadenHidro" data-layer="inatividade_hidro_tempo" class="sub-menu menu-unfold">
+                                            <div class="iconfont noselect notap">IT</div>
+                                            <div class="menu-text noselect notap">Inatividade por Tempo</div>
+                                        </li>
+
+                                        <li data-parent="cemadenHidro" data-layer="desabilitada_hidro" class="sub-menu menu-unfold">
+                                            <div class="iconfont noselect notap">D</div>
+                                            <div class="menu-text noselect notap">Desabilitada</div>
+                                        </li>
+
+                                        <!--Operadoras-->
+                                        <li data-parent="chipOperadoraHidro" class="">
+                                            <div class="iconfont noselect notap">OP</div>
+                                            <div class="menu-text noselect notap">Inatividade Chip - Últimas 24h</div>
+                                        </li>                                                                       
+
+                                        <li data-parent="chipOperadoraHidro" data-layer="chip_inativo_vodafone_hidro" class="sub-menu">
+                                            <div class="iconfont noselect notap">V</div>
+                                            <div class="menu-text noselect notap">Vodafone</div>
+                                        </li>
+                                        <li data-parent="chipOperadoraHidro" data-layer="chip_inativo_oi_hidro" class="sub-menu">
+                                            <div class="iconfont noselect notap">Oi</div>
+                                            <div class="menu-text noselect notap">Oi</div>
+                                        </li>    
+                                        <li data-parent="chipOperadoraHidro" data-layer="chip_inativo_vivo_hidro" class="sub-menu">
+                                            <div class="iconfont noselect notap">Vi</div>
+                                            <div class="menu-text noselect notap">Vivo</div>
+                                        </li> 
+                                        <li data-parent="chipOperadoraHidro" data-layer="chip_inativo_claro_hidro" class="sub-menu">
+                                            <div class="iconfont noselect notap">CL</div>
+                                            <div class="menu-text noselect notap">Claro</div>
+                                        </li>
+
+                                        <li data-parent="chipOperadoraHidro" data-layer="chip_inativo_tim_hidro" class="sub-menu">
+                                            <div class="iconfont noselect notap">T</div>
+                                            <div class="menu-text noselect notap">Tim</div>
+                                        </li>
+
+                                        <li data-parent="chipOperadoraHidro" data-layer="chip_inativo_null_hidro" class="sub-menu">
+                                            <div class="iconfont noselect notap">SC</div>
+                                            <div class="menu-text noselect notap">Sem Chip</div>
+                                        </li>
+                                        <!--Operadoras-->
+
+
+                                        <li data-parent="alertasHidro" class="">
+                                            <div class="iconfont noselect notap">AR</div>
+                                            <div class="menu-text noselect notap">Áreas de Risco</div>
+                                        </li>                                    
+
+                                        <li data-parent="alertasHidro" data-layer="risco_hidrologico_hidro" class="sub-menu">
+                                            <div class="iconfont noselect notap">H</div>
+                                            <div class="menu-text noselect notap">Hidro</div>
+                                        </li>  
+                                        <li data-parent="alertasHidro" data-layer="risco_geologico_hidro" class="sub-menu">
+                                            <div class="iconfont noselect notap">G</div>
+                                            <div class="menu-text noselect notap">Geológico</div>
+                                        </li>  
+                                        <li data-parent="alertasHidro" data-layer="area_risco_sem_indice_hidro" class="sub-menu">
+                                            <div class="iconfont noselect notap">I</div>
+                                            <div class="menu-text noselect notap">Sem Índice</div>
+                                        </li> 
+                                        <li data-parent="baciasHidrograficas" data-layer="bacias_hidrograficas" class="">
+                                            <div class="iconfont noselect notap">B</div>
+                                            <div class="menu-text noselect notap">Bacias Hidrográficas</div>
+                                        </li>                                    
+                                        <li data-parent="baciasHidrograficas" data-layer="camada_bacias_hidrologicas" class="sub-menu">
+                                            <div class="iconfont noselect notap">BN</div>
+                                            <div class="menu-text noselect notap">Bacias Nacionais</div>
+                                        </li> 
+                                    </ul>
+                                </section>
+                            </div>
+                            <!--MENU DE CAMADAS HIDRO-->
+
+                            <!--legenda inatividade por tempo hidro-->                             
+                            <div id="legenda-dias-inatividade-hidro" class='my-legend legenda-mapa'>                                
+                                <div class='legend-title'>Dias de Inatividade</div>
+                                <div class='legend-scale'>
+                                    <ul class='legend-labels'>
+                                        <li><span style='background:#9b9b9b;'></span>0</li>
+                                        <label id="inatividade-h0" style="position: relative;left: 80%;top: 11.5%;font-weight: bold;"></label> 
+
+                                        <li><span style='background:#fff900;'></span>1-30</li>
+                                        <label id="inatividade-h1" style="position: relative;left: 80%;top: 22.5%;font-weight: bold;"></label> 
+
+                                        <li><span style='background:#ffc700;'></span>31-60</li>
+                                        <label id="inatividade-h2" style="position: relative;left: 80%;top: 32.5%;font-weight: bold;"></label> 
+
+                                        <li><span style='background:#ff8300;'></span>61-90</li>
+                                        <label id="inatividade-h3" style="position: relative;left: 80%;top: 43.5%;font-weight: bold;"></label> 
+
+                                        <li><span style='background:#f75718;'></span>91-300</li>
+                                        <label id="inatividade-h4" style="position: relative;left: 80%;top: 54.5%;font-weight: bold;"></label> 
+
+                                        <li><span style='background:#FF0000;'></span>301-600</li>
+                                        <label id="inatividade-h5" style="position: relative;left: 80%;top: 64.5%;font-weight: bold;"></label> 
+
+                                        <li><span style='background:#990000;'></span>600+</li>
+                                        <label id="inatividade-h6"  style="position: relative;left: 80%;top: 74.5%;font-weight: bold;"></label> 
+
+                                        <li><span style='background:#191919;'></span>NC</li>
+                                        <label id="inatividade-h7" style="position: relative;left: 80%;top: 86.5%;font-weight: bold;"></label> 
+                                    </ul>
+                                </div>                                
+                            </div>
+                             <!--legenda inatividade por tempo hidro-->
+                        </div>
+                        <!--MAPA HIDRO INATIVAS-->   
+
+                        <!--popup onClick hidro-->
+                        <div id="popup-hidro" class="ol-popup">
+                            <a href="#" id="popup-closer-hidro" class="ol-popup-closer" style="color: white" ></a>
+                            <div id="popup-content-hidro" class="scroll pulsating-icon" style="font-size: 13px"></div>
+                        </div>
+
+                        <!--popup onHover hidro-->
+                        <div id="popup-hover-hidro" class="ol-popup">
+                            <a href="#" id="popup-closer-hover-hidro" class="ol-popup-closer" style="color: white" ></a>
+                            <div id="infoPcdHidro" class="scroll pulsating-icon" style="font-size: 13px"></div>
+                        </div>                                                    
+                    </div>
+                    <!-- END CAROUSEL REDE HIDRO-->
+
+
+                    <!--START CAROUSEL REDE GEO -->
+                    <div id="pagina-6" class="item" style="width: 100%; height: 100%">
+                        <ul class="x-navigation x-navigation-panel" style="height: 50px;background: linear-gradient(#a57747 0%, #ffffff00 100%);"></ul>
+                        <div class="row">                            
+                            <div class="col-md-12" style="bottom: 65px; height: 0px;">
+                                <div class="title-position">
+                                    <h1 style="margin-top: 0px; margin-bottom: 0px;font-weight: 500; position: relative; top: 18px">Rede Geotécnica</h1>
+                                </div>                
+                            </div>                                                                                    
+                        </div>
+
+                        <div class="row">                            
+                            <div class="col-sm-2">
+                                <a><img id="logo-cemaden-geo" class="logo-cemaden" onclick="gotoSlide(0)" style="cursor: pointer" src="resources/img/CemadenLog.png"/></a>
+                            </div>
+                            
+                            <!--ATIVAS GEO--> 
+                            <div class="col-sm-1">
+                                <div class="titulo-info-grafico">Ativa</div>
+                                <label id="outPut-OperacionalGeralGeo" class="numero-info-grafico"/>
+                            </div>
+
+                            <!--SUSPEITAS GEO-->
+                            <div class="col-sm-1">
+                                <div class="titulo-info-grafico">Suspeita</div>
+                                <label id="outPut-SuspeitasGeralGeo" class="numero-info-grafico"/>
+                            </div>
+                            
+                            <!--INATIVAS GEO-->
+                            <div class="col-sm-1">
+                                <div class="titulo-info-grafico">Inativa</div>
+                                <label id="outPut-InativasGeralGeo" class="numero-info-grafico"/>
+                            </div>
+                            
+                            <!--DESABILITADAS-->
+                            <div class="col-sm-2">
+                                <div class="titulo-info-grafico">Desabilitadas</div>
+                                <label id="outPut-DesabilitadasGeralGeo" class="numero-info-grafico"/>
+                            </div>
+                            
+                            <div class="col-sm-2">
+                                <img title="Voltar a Tela Principal" onclick="gotoSlide(0)" class="icon-estacao-rede" src="resources/img/Geo.png"/>
+                            </div>                             
+                        </div>                                                 
+
+                        <!--START GRAFICO REDE GEOTECNICAS-->
+                        <div class="col-md-8" style="bottom: 40px">
+                            <div id="table-container-rede-geo" style="height: 400px; margin: 36px auto"></div>
+                            <div id="table-container-inatividade-rede-geo" style="height: 370px; margin: 0px auto"></div>
+                        </div>                            
+                        <!--END GRAFICO REDE GEO-->
+
+                        <!--MAPA GEO-->
+                        <div class="col-md-4" style="bottom: 0px">                                                       
+                            <div class="col-sm">                                                                    
+                                    <div id="map5" style="box-shadow: 1px 1px 7px #00000052"></div>                                                                                               	
+                            </div>  
+                            
+                            <!--MENU DE CAMADAS GEO-->
+                            <div id="detail-rhpane-wrapper-geo" draggable="true">
+                                <div id="rhpaneGeo">
+                                    <ul id="overlayGeo" data-ref="overlayGeo" class="menu iconsize-19">
+                                        <li data-parent="cemadenGeo" class="selected">
+                                            <div class="iconfont noselect notap" style=" background: #a57747;box-shadow: 0px 0px 1px rgba(0,0,0,0.63);color: white;">G</div>
+                                            <div class="menu-text noselect notap">Geotécnica</div>
+                                        </li>                                    					
+                                        <li data-parent="cemadenGeo" data-layer="ativa_geo" class="sub-menu menu-unfold">
+                                            <div class="iconfont noselect notap">A</div>
+                                            <div class="menu-text noselect notap">Ativas</div>
+                                        </li>
+                                        <li data-parent="cemadenGeo" data-layer="suspeita_geo" class="sub-menu menu-unfold">
+                                            <div class="iconfont noselect notap">S</div>
+                                            <div class="menu-text noselect notap">Suspeita</div>
+                                        </li>
+                                        <li data-parent="cemadenGeo" data-layer="inatividade_geo" class="sub-menu menu-unfold mark_selected_inativas">
+                                            <div class="iconfont noselect notap">I</div>
+                                            <div class="menu-text noselect notap">Inativas</div>
+                                        </li>
+
+                                        <li id="inatividade-tempo-geo" data-parent="cemadenGeo" data-layer="inatividade_geo_tempo" class="sub-menu menu-unfold">
+                                            <div class="iconfont noselect notap">IT</div>
+                                            <div class="menu-text noselect notap">Inatividade por Tempo</div>
+                                        </li>
+
+                                        <li data-parent="cemadenGeo" data-layer="desabilitada_geo" class="sub-menu menu-unfold">
+                                            <div class="iconfont noselect notap">D</div>
+                                            <div class="menu-text noselect notap">Desabilitada</div>
+                                        </li>  
+                                        
+                                        <!--Operadoras-->
+                                        <li data-parent="chipOperadoraGeo" class="">
+                                            <div class="iconfont noselect notap">OP</div>
+                                            <div class="menu-text noselect notap">Inatividade Chip - Últimas 24h</div>
+                                        </li>                                                                       
+
+                                        <li data-parent="chipOperadoraGeo" data-layer="chip_inativo_vodafone_geo" class="sub-menu">
+                                            <div class="iconfont noselect notap">V</div>
+                                            <div class="menu-text noselect notap">Vodafone</div>
+                                        </li>
+                                        <li data-parent="chipOperadoraGeo" data-layer="chip_inativo_oi_geo" class="sub-menu">
+                                            <div class="iconfont noselect notap">Oi</div>
+                                            <div class="menu-text noselect notap">Oi</div>
+                                        </li>    
+                                        <li data-parent="chipOperadoraGeo" data-layer="chip_inativo_vivo_geo" class="sub-menu">
+                                            <div class="iconfont noselect notap">Vi</div>
+                                            <div class="menu-text noselect notap">Vivo</div>
+                                        </li> 
+                                        <li data-parent="chipOperadoraGeo" data-layer="chip_inativo_claro_geo" class="sub-menu">
+                                            <div class="iconfont noselect notap">CL</div>
+                                            <div class="menu-text noselect notap">Claro</div>
+                                        </li>
+                                        
+                                        <li data-parent="chipOperadoraGeo" data-layer="chip_inativo_tim_geo" class="sub-menu">
+                                            <div class="iconfont noselect notap">T</div>
+                                            <div class="menu-text noselect notap">Tim</div>
+                                        </li>
+                                        
+                                        <li data-parent="chipOperadoraGeo" data-layer="chip_inativo_null_geo" class="sub-menu">
+                                            <div class="iconfont noselect notap">SC</div>
+                                            <div class="menu-text noselect notap">Sem Chip</div>
+                                        </li>
+                                        
+                                        <!--Operadoras-->
+
+                                        <li data-parent="alertasGeo" class="">
+                                            <div class="iconfont noselect notap">AR</div>
+                                            <div class="menu-text noselect notap">Áreas de Risco</div>
+                                        </li>                                                                       
+
+                                        <li data-parent="alertasGeo" data-layer="risco_hidrologico_geo" class="sub-menu">
+                                            <div class="iconfont noselect notap">H</div>
+                                            <div class="menu-text noselect notap">Hidro</div>
+                                        </li>
+                                        <li data-parent="alertasGeo" data-layer="risco_geologico_geo" class="sub-menu">
+                                            <div class="iconfont noselect notap">G</div>
+                                            <div class="menu-text noselect notap">Geológico</div>
+                                        </li>    
+                                        <li data-parent="alertasGeo" data-layer="area_risco_sem_indice_geo" class="sub-menu">
+                                            <div class="iconfont noselect notap">I</div>
+                                            <div class="menu-text noselect notap">Sem Índice</div>
+                                        </li>                                                                     
+
+                                    </ul>
+                                </div>
+                            </div>
+                            <!--MENU DE CAMADAS GEO-->
+                            
+                            <!--MAPA LEGENDA GEO INATIVAS-->                                                                      
+                            <div id="legenda-dias-inatividade-geo" class='my-legend legenda-mapa'>                                
+                                <div class='legend-title'>Dias de Inatividade</div>
+                                <div class='legend-scale'>
+                                    <ul class='legend-labels'>
+                                        <li><span style='background:#9b9b9b;'></span>0</li>
+                                        <label id="inatividade-g0" style="position: relative;left: 80%;bottom: 11.5%;font-weight: bold;"></label> 
+                                        <label id="inatividade-chipVivoGeo" style="position: relative;left: 80%;bottom: 11.5%;font-weight: bold;"></label> 
+
+                                        <li><span style='background:#fff900;'></span>1-30</li>
+                                        <label id="inatividade-g1" style="position: relative;left: 80%;top: 22.5%;font-weight: bold;"></label> 
+
+                                        <li><span style='background:#ffc700;'></span>31-60</li>
+                                        <label id="inatividade-g2" style="position: relative;left: 80%;top: 32.5%;font-weight: bold;"></label> 
+
+                                        <li><span style='background:#ff8300;'></span>61-90</li>
+                                        <label id="inatividade-g3" style="position: relative;left: 80%;top: 43.5%;font-weight: bold;"></label> 
+
+                                        <li><span style='background:#f75718;'></span>91-300</li>
+                                        <label id="inatividade-g4" style="position: relative;left: 80%;top: 54.5%;font-weight: bold;"></label> 
+
+                                        <li><span style='background:#FF0000;'></span>301-600</li>
+                                        <label id="inatividade-g5" style="position: relative;left: 80%;top: 64.5%;font-weight: bold;"></label> 
+
+                                        <li><span style='background:#990000;'></span>600+</li>
+                                        <label id="inatividade-g6"  style="position: relative;left: 80%;top: 74.5%;font-weight: bold;"></label> 
+
+                                        <li><span style='background:#191919;'></span>NC</li>
+                                        <label id="inatividade-g7" style="position: relative;left: 80%;top: 86.5%;font-weight: bold;"></label> 
+                                    </ul>
+                                </div>                                
+                            </div>  
+                            <!--MAPA LEGENDA GEO INATIVAS-->
+                        </div>                        
+                        <!--popup geo-->
+                        <div id="popup-geo" class="ol-popup">
+                            <a href="#" id="popup-closer-geo" class="ol-popup-closer" style="color: white" ></a>
+                            <div id="popup-content-geo" class="scroll pulsating-icon" style="font-size: 13px"></div>
+                        </div>  
+                        <!--popup onHover geo-->
+                        <div id="popup-hover-geo" class="ol-popup">
+                            <a href="#" id="popup-closer-hover-geo" class="ol-popup-closer" style="color: white" ></a>
+                            <div id="infoPcdGeo" class="scroll pulsating-icon" style="font-size: 13px"></div>
+                        </div>                        
+                    </div>
+                </div>
+            </div> 
+        </div>
+        <!--END PAGE CONTAINER -->                            
+        <script type="text/javascript" src="resources/js/openLayersPluvio.js"></script> 
+        <script type="text/javascript" src="resources/js/openLayersAcqua.js"></script> 
+        <script type="text/javascript" src="resources/js/openLayersHidro.js"></script> 
+        <script type="text/javascript" src="resources/js/openLayersAgro.js"></script> 
+        <script type="text/javascript" src="resources/js/openLayersGeo.js"></script> 
+        <script type="text/javascript" src="resources/js/openLayersQuadroGeral.js"></script>                       
+    </body>
+</html>
