@@ -4,8 +4,8 @@ var arrLayersAgrometeorologica = [];
 // MAPA
 arrLayersAgrometeorologica[0] = new ol.layer.Tile({
     title: "PCD's Agro",
-//    source: new ol.source.OSM()
-    source: new ol.source.XYZ({url: "http://virt142.cemaden.gov.br/osm_tiles/{z}/{x}/{y}.png"})
+    source: new ol.source.OSM()
+//    source: new ol.source.XYZ({url: "http://virt142.cemaden.gov.br/osm_tiles/{z}/{x}/{y}.png"})
 });
 
 // Estados
@@ -184,8 +184,8 @@ function getStatusPcdsAgroMap(){
         async: true,
         global: false,        
 //        url: "http://localhost:8081/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonStatusPcdsAgro",/*local cemaden*/
-//        url: "http://localhost:8080/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonStatusPcdsAgro",/*meu desk*/
-        url: "http://engenharia.cemaden.gov.br:8080/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonStatusPcdsAgro",
+        url: "http://localhost:8080/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonStatusPcdsAgro",/*meu desk*/
+//        url: "http://engenharia.cemaden.gov.br:8080/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonStatusPcdsAgro",
         dataType: "json",
         cache: false,
         crossDomain: true,

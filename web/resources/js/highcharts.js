@@ -12,8 +12,8 @@ function plotarGraficosdeColunas(estacao) {
     $.ajax({
         async: true,
         global: false,
-        url: "http://localhost:8081/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonRedePcdsUF",/*local cemaden*/
-//        url: "http://localhost:8080/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonRedePcdsUF",/*meu desk*/
+//        url: "http://localhost:8081/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonRedePcdsUF",/*local cemaden*/
+        url: "http://localhost:8080/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonRedePcdsUF",/*meu desk*/
 //        url: "http://engenharia.cemaden.gov.br:8080/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonRedePcdsUF",
         dataType: "json",
         cache: false,
@@ -137,8 +137,8 @@ function plotarGraficosdeLinhas(estacao) {
     $.ajax({
         async: true,
         global: false,
-        url: "http://localhost:8081/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonInatividadePcds",/*local cemaden*/
-//        url: "http://localhost:8080/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonInatividadePcds",/*meu desk*/
+//        url: "http://localhost:8081/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonInatividadePcds",/*local cemaden*/
+        url: "http://localhost:8080/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonInatividadePcds",/*meu desk*/
 //        url: "http://engenharia.cemaden.gov.br:8080/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonInatividadePcds",
         dataType: "json",
         cache: false,

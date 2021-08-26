@@ -4,8 +4,8 @@ var arrLayersHidro = [];
 // MAPA
 arrLayersHidro[0] = new ol.layer.Tile({
     title: "PCD's Hidrologicas",
-//    source: new ol.source.OSM()
-    source: new ol.source.XYZ({url: "http://virt142.cemaden.gov.br/osm_tiles/{z}/{x}/{y}.png"})
+    source: new ol.source.OSM()
+//    source: new ol.source.XYZ({url: "http://virt142.cemaden.gov.br/osm_tiles/{z}/{x}/{y}.png"})
 });
 
 // Estados
@@ -199,8 +199,8 @@ function getStatusPcdsHidroMap(){
         async: true,
         global: false,        
 //        url: "http://localhost:8081/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonStatusPcdsHidro",/*local cemaden*/
-//        url: "http://localhost:8080/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonStatusPcdsHidro",/*meu desk*/
-        url: "http://engenharia.cemaden.gov.br:8080/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonStatusPcdsHidro",
+        url: "http://localhost:8080/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonStatusPcdsHidro",/*meu desk*/
+//        url: "http://engenharia.cemaden.gov.br:8080/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonStatusPcdsHidro",
         dataType: "json",
         cache: false,
         crossDomain: true,
@@ -220,8 +220,8 @@ function getPcdsInativasOperadorasHidro(){
         async: true,
         global: false,        
 //        url: "http://localhost:8081/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonPcdsInativasOperadora",/*local cemaden*/
-//        url: "http://localhost:8080/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonPcdsInativasOperadora",/*meu desk*/
-        url: "http://engenharia.cemaden.gov.br:8080/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonPcdsInativasOperadora",
+        url: "http://localhost:8080/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonPcdsInativasOperadora",/*meu desk*/
+//        url: "http://engenharia.cemaden.gov.br:8080/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonPcdsInativasOperadora",
         dataType: "json",
         cache: false,
         crossDomain: true,

@@ -4,8 +4,8 @@ var arrLayersAcqua = [];
 // MAPA
 arrLayersAcqua[0] = new ol.layer.Tile({
     title: "PCD's Acqua",
-//    source: new ol.source.OSM()
-    source: new ol.source.XYZ({url: "http://virt142.cemaden.gov.br/osm_tiles/{z}/{x}/{y}.png"})
+    source: new ol.source.OSM()
+//    source: new ol.source.XYZ({url: "http://virt142.cemaden.gov.br/osm_tiles/{z}/{x}/{y}.png"})
 });
 
 // Estados
@@ -187,8 +187,8 @@ function getStatusPcdsAcquaMap(){
         async: true,
         global: false,        
 //        url: "http://localhost:8081/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonStatusPcdsAcqua",/*local cemaden*/
-//        url: "http://localhost:8080/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonStatusPcdsAcqua",/*meu desk*/
-        url: "http://engenharia.cemaden.gov.br:8080/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonStatusPcdsAcqua",
+        url: "http://localhost:8080/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonStatusPcdsAcqua",/*meu desk*/
+//        url: "http://engenharia.cemaden.gov.br:8080/DashboardWS-1.0-SNAPSHOT/rest/message/getJsonStatusPcdsAcqua",
         dataType: "json",
         cache: false,
         crossDomain: true,
